@@ -8,6 +8,7 @@
   "dependencies": {
     "@hapi/iron": "6.0.0",
     "cookie": "0.4.1",
+    "mongoose": "^5.11.15",
     "next": "latest",
     "next-connect": "0.8.1",
     "passport": "0.4.1",

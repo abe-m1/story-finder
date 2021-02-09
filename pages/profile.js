@@ -1,9 +1,9 @@
-import { useUser } from '../lib/hooks'
-import Layout from '../components/layout'
+import { useUser } from '../lib/hooks';
+import Layout from '../components/layout';
 
 const Profile = () => {
-  const user = useUser({ redirectTo: '/login' })
-
+  const user = useUser({ redirectTo: '/login' });
+  console.log('user', user);
   return (
     <Layout>
       <h1>Profile</h1>
@@ -21,7 +21,7 @@ const Profile = () => {
         }
       `}</style>
     </Layout>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
