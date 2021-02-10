@@ -8,6 +8,9 @@
   "dependencies": {
     "@hapi/iron": "6.0.0",
     "cookie": "0.4.1",
+    "d3": "4.2.1",
+    "d3-dtree": "^2.4.1",
+    "lodash": "^4.17.20",
     "mongoose": "^5.11.15",
     "next": "latest",
     "next-connect": "0.8.1",
@@ -15,6 +18,7 @@
     "passport-local": "1.0.0",
     "react": "latest",
     "react-dom": "latest",
+    "react-google-maps": "^9.4.5",
     "swr": "0.3.0",
     "uuid": "8.3.1"
   },
