@@ -8,7 +8,7 @@ const Header = () => {
     <header>
       <nav>
         <ul>
-          <li>
+          <li className="logo">
             <Link href="/">
               <a>Home</a>
             </Link>
@@ -20,6 +20,11 @@ const Header = () => {
           </li>
           {user ? (
             <>
+              <li>
+                <Link href="/map">
+                  <a>Map</a>
+                </Link>
+              </li>
               <li>
                 <Link href="/profile">
                   <a>Profile</a>
@@ -63,6 +68,9 @@ const Header = () => {
         header {
           color: #fff;
           background-color: #333;
+        }
+        .logo {
+          color: red;
         }
       `}</style>
     </header>

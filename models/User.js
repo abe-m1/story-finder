@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema({
   salt: {
     type: String,
   },
+  onboardingComplete: {
+    type: Boolean,
+  },
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

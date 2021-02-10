@@ -5,7 +5,7 @@ import Layout from '../components/layout';
 import Form from '../components/form';
 
 const Login = () => {
-  useUser({ redirectTo: '/', redirectIfFound: true });
+  useUser({ redirectTo: '/onboard', redirectIfFound: true });
 
   const [errorMsg, setErrorMsg] = useState('');
 
