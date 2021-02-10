@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import Header from './header'
+import Head from 'next/head';
+import Header from './header';
 
 const Layout = (props) => (
   <>
@@ -25,14 +25,17 @@ const Layout = (props) => (
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
           'Helvetica Neue', Arial, Noto Sans, sans-serif, 'Apple Color Emoji',
           'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        height: 100vh;
       }
       .container {
-        max-width: 42rem;
+        // max-width: 42rem;
+
         margin: 0 auto;
         padding: 2rem 1.25rem;
+        height: 95vh;
       }
     `}</style>
   </>
-)
+);
 
-export default Layout
+export default Layout;
