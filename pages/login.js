@@ -49,6 +49,12 @@ const Login = () => {
             padding: 1rem;
             border: 1px solid #ccc;
             border-radius: 4px;
+            background-color: #fff;
+          }
+          .page {
+            padding: 3rem;
+            background-image: url('./bg-pattern1.png');
+            height: 100%;
           }
         `}</style>
       </div>

@@ -32,6 +32,7 @@ const Home = () => {
 
         <style jsx>{`
           .back {
+            padding: 3rem;
             background-image: url('./back.jpg');
             height: 100%;
           }

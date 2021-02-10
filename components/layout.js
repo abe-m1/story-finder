@@ -48,7 +48,7 @@ const Layout = (props) => (
         // max-width: 42rem;
 
         margin: 0 auto;
-        padding: 2rem 1.25rem;
+        // padding: 2rem 1.25rem;
         height: 95vh;
       }
     `}</style>
