@@ -3,7 +3,13 @@ import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
 
-const ImageForm = ({ formId, userForm, userId, forNewPet = true }) => {
+const ImageForm = ({
+  formId,
+  userForm,
+  userId,
+  onboardStep,
+  forNewPet = true,
+}) => {
   const router = useRouter();
   const contentType = 'application/json';
   const [errors, setErrors] = useState({});
@@ -45,7 +51,7 @@ const ImageForm = ({ formId, userForm, userId, forNewPet = true }) => {
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify({ imagePreviewUrl, userId }),
+        body: JSON.stringify({ imagePreviewUrl, userId, onboardStep }),
       });
 
       // Throw error with status code in case Fetch API req failed
@@ -53,7 +59,7 @@ const ImageForm = ({ formId, userForm, userId, forNewPet = true }) => {
         throw new Error(res.status);
       }
 
-      // router.push('/');
+      router.push('/onboard');
     } catch (error) {
       setMessage('Failed to add pet');
     }

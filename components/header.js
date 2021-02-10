@@ -13,11 +13,6 @@ const Header = () => {
               <a>Home</a>
             </Link>
           </li>
-          <li>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </li>
           {user ? (
             <>
               <li>
@@ -43,17 +38,24 @@ const Header = () => {
               </li>
             </>
           ) : (
-            <li>
-              <Link href="/login">
-                <a>Login</a>
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link href="/about">
+                  <a>About</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>
       <style jsx>{`
         nav {
-          max-width: 42rem;
+          // max-width: 42rem;
           margin: 0 auto;
           padding: 0.2rem 1.25rem;
         }
@@ -62,12 +64,13 @@ const Header = () => {
           list-style: none;
           margin-left: 0;
           padding-left: 0;
+          align-items: center;
         }
         li {
           margin-right: 1rem;
         }
         li:first-child {
-          margin-left: auto;
+          // margin-left: auto;
         }
         a {
           color: #fff;
@@ -79,6 +82,7 @@ const Header = () => {
         }
         .logo {
           color: red;
+          margin-right: auto;
         }
         .profile-pic {
           height: 2rem;

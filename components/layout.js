@@ -21,7 +21,7 @@ const Layout = (props) => (
         type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/d3-dtree@2.4.1/dist/dTree.min.js"
       ></script>
-      <title>With Cookies</title>
+      <title>Story App</title>
     </Head>
 
     <Header />

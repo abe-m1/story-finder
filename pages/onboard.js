@@ -25,8 +25,16 @@ const Onboard = () => {
         <ImageForm
           formId="add-user-form"
           userId={user._id}
+          onboardStep={3}
           userForm={{ imagePreviewUrl: '' }}
         />
+      </Layout>
+    );
+  }
+  if (user.onboardingStep === 3) {
+    return (
+      <Layout>
+        <h1>step 3</h1>
       </Layout>
     );
   }

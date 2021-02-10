@@ -34,17 +34,22 @@ export default async function handler(req, res) {
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
 
         if (saveToCloud) {
-          const user = await User.findByIdAndUpdate(
-            req.body.userId,
-            { image_url: saveToCloud.secure_url },
-            {
-              new: true,
-              runValidators: true,
-            }
-          );
+          console.log('reeq body', req.body);
+          const newData = req.body.onboardStep
+            ? {
+                image_url: saveToCloud.secure_url,
+                onboardingStep: req.body.onboardStep,
+              }
+            : { image_url: saveToCloud.secure_url };
+          console.log(newData);
+          const user = await User.findByIdAndUpdate(req.body.userId, newData, {
+            // new: true,
+            // runValidators: true,
+          });
           res.status(201).json({ success: true, data: user });
         }
       } catch (error) {
+        console.log(error);
         res.status(400).json({ success: false });
       }
       break;

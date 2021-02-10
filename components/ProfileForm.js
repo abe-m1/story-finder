@@ -59,7 +59,7 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
         throw new Error(res.status);
       }
 
-      // router.push('/');
+      router.push('/onboard');
     } catch (error) {
       setMessage('Failed to add pet');
     }
