@@ -10,7 +10,6 @@ const Onboard = () => {
   const petForm = {
     name: '',
     age: 0,
-    diet: [],
     image_url: '',
   };
 
@@ -19,9 +18,18 @@ const Onboard = () => {
     return <Layout>Loading...</Layout>;
   }
 
+  if (user.onboardingStep === 2) {
+    return (
+      <Layout>
+        <h1>step 2</h1>
+        {/* <Form formId="add-user-form" userId={user._id} userForm={petForm} /> */}
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
-      <Form formId="add-user-form" userForm={petForm} />
+      <Form formId="add-user-form" userId={user._id} userForm={petForm} />
     </Layout>
   );
 };

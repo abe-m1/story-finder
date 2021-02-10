@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
 
-const ProfileForm = ({ formId, userForm, forNewPet = false }) => {
+const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
+  console.log('IN profile form', userId);
   const router = useRouter();
   const contentType = 'application/json';
   const [errors, setErrors] = useState({});
@@ -13,6 +14,7 @@ const ProfileForm = ({ formId, userForm, forNewPet = false }) => {
     name: userForm.name,
     age: userForm.age,
     image_url: userForm.image_url,
+    onboardingStep: 2,
   });
 
   // const user = useUser();
@@ -22,7 +24,7 @@ const ProfileForm = ({ formId, userForm, forNewPet = false }) => {
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
     try {
-      const res = await fetch(`/api/user/6022fc0495b907611ed4b289`, {
+      const res = await fetch(`/api/user/${userId}`, {
         method: 'PATCH',
         headers: {
           Accept: contentType,
@@ -38,8 +40,8 @@ const ProfileForm = ({ formId, userForm, forNewPet = false }) => {
 
       const { data } = await res.json();
 
-      mutate(`/api/user/6022fc0495b907611ed4b289`, data, false); // Update the local data without a revalidation
-      router.push('/');
+      mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
+      // router.push('/');
     } catch (error) {
       console.log(error);
       setMessage('Failed to update pet');
@@ -63,7 +65,7 @@ const ProfileForm = ({ formId, userForm, forNewPet = false }) => {
         throw new Error(res.status);
       }
 
-      router.push('/');
+      // router.push('/');
     } catch (error) {
       setMessage('Failed to add pet');
     }

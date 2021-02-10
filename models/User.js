@@ -22,6 +22,11 @@ const UserSchema = new mongoose.Schema({
   onboardingComplete: {
     type: Boolean,
   },
+
+  onboardingStep: {
+    type: Number,
+    default: 1,
+  },
   age: {
     type: Number,
   },
