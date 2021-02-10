@@ -22,6 +22,16 @@ const UserSchema = new mongoose.Schema({
   onboardingComplete: {
     type: Boolean,
   },
+  age: {
+    type: Number,
+  },
+  image_url: {
+    type: String,
+  },
+
+  name: {
+    type: String,
+  },
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);
