@@ -26,10 +26,8 @@ const Login = () => {
         body: JSON.stringify(body),
       });
       if (res.status === 200) {
-        console.log('OK login', res, user);
         Router.push('/profile');
       } else {
-        console.log('THIS IS ERROR');
         throw new Error(await res.text());
       }
     } catch (error) {

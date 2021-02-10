@@ -1,4 +1,5 @@
 import Form from '../components/ProfileForm';
+import ImageForm from '../components/ImageForm';
 import Layout from '../components/layout';
 import { useUser } from '../lib/hooks';
 import { useEffect } from 'react';
@@ -6,7 +7,6 @@ import { useEffect } from 'react';
 const Onboard = () => {
   // Fetch the user client-side
   const user = useUser({ redirectTo: '/login' });
-  console.log('USER', user);
   const petForm = {
     name: '',
     age: 0,
@@ -22,7 +22,11 @@ const Onboard = () => {
     return (
       <Layout>
         <h1>step 2</h1>
-        {/* <Form formId="add-user-form" userId={user._id} userForm={petForm} /> */}
+        <ImageForm
+          formId="add-user-form"
+          userId={user._id}
+          userForm={{ imagePreviewUrl: '' }}
+        />
       </Layout>
     );
   }

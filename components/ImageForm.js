@@ -3,18 +3,12 @@ import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
 
-const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
+const ImageForm = ({ formId, userForm, userId, forNewPet = true }) => {
   const router = useRouter();
   const contentType = 'application/json';
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
-
-  const [form, setForm] = useState({
-    name: userForm.name,
-    age: userForm.age,
-    image_url: userForm.image_url,
-    onboardingStep: 2,
-  });
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
@@ -43,15 +37,15 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
   };
 
   /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (form) => {
+  const postData = async (imagePreviewUrl) => {
     try {
-      const res = await fetch('/api/pets', {
+      const res = await fetch('/api/media', {
         method: 'POST',
         headers: {
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ imagePreviewUrl, userId }),
       });
 
       // Throw error with status code in case Fetch API req failed
@@ -81,51 +75,56 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
     e.preventDefault();
     const errs = formValidate();
     if (Object.keys(errs).length === 0) {
-      forNewPet ? postData(form) : putData(form);
+      forNewPet ? postData(imagePreviewUrl) : putData(imagePreviewUrl);
     } else {
       setErrors({ errs });
     }
   };
 
+  const handleImageChange = (e) => {
+    e.preventDefault();
+
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
-    if (!form.name) err.name = 'Name is required';
+    // if (!form.imagePreviewUrl) err.name = 'Name is required';
     // if (!form.owner_name) err.owner_name = 'Owner is required';
     // if (!form.species) err.species = 'Species is required';
-    if (!form.image_url) err.image_url = 'Image URL is required';
+    // if (!form.image_url) err.image_url = 'Image URL is required';
     return err;
   };
 
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          maxLength="20"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="age">Age</label>
-        <input
-          type="number"
-          name="age"
-          value={form.age}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="image_url">Image URL</label>
-        <input
-          type="url"
-          name="image_url"
-          value={form.image_url}
-          onChange={handleChange}
-          required
-        />
+        <label htmlFor="image">Upload Image</label>
+        <div className="row">
+          <div className="">
+            <div className="">
+              Add image
+              <input
+                className=""
+                type="file"
+                onChange={(e) => handleImageChange(e)}
+              />
+            </div>
+          </div>
+          <div className="">
+            {imagePreviewUrl && (
+              <button onClick={() => setImagePreviewUrl('')}>remove</button>
+            )}
+          </div>
+        </div>
 
         <button type="submit" className="btn">
           Submit
@@ -182,4 +181,4 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
   );
 };
 
-export default ProfileForm;
+export default ImageForm;

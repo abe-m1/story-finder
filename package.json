@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@hapi/iron": "6.0.0",
+    "cloudinary": "^1.24.0",
     "cookie": "0.4.1",
     "d3": "4.2.1",
     "d3-dtree": "^2.4.1",
