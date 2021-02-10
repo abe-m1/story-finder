@@ -34,6 +34,13 @@ const Header = () => {
                 <a href="/api/logout">Logout</a>
               </li>
               <li>{user.name}</li>
+              <li>
+                <img
+                  src={user.image_url}
+                  alt="user image"
+                  className="profile-pic"
+                />
+              </li>
             </>
           ) : (
             <li>
@@ -72,6 +79,13 @@ const Header = () => {
         }
         .logo {
           color: red;
+        }
+        .profile-pic {
+          height: 2rem;
+          width: 2rem;
+          object-fit: center;
+          border-radius: 50%;
+          border: 2px solid #fff;
         }
       `}</style>
     </header>
