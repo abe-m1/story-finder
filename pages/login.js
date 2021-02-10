@@ -5,7 +5,7 @@ import Layout from '../components/layout';
 import Form from '../components/form';
 
 const Login = () => {
-  useUser({ redirectTo: '/onboard', redirectIfFound: true });
+  let user = useUser({ redirectTo: '/onboard', redirectIfFound: true });
 
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -26,6 +26,7 @@ const Login = () => {
         body: JSON.stringify(body),
       });
       if (res.status === 200) {
+        console.log('OK login', res, user);
         Router.push('/profile');
       } else {
         console.log('THIS IS ERROR');

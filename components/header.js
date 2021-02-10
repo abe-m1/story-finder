@@ -33,6 +33,7 @@ const Header = () => {
               <li>
                 <a href="/api/logout">Logout</a>
               </li>
+              <li>{user.name}</li>
             </>
           ) : (
             <li>
