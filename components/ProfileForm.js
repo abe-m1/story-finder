@@ -9,6 +9,7 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   const [position, setPosition] = useState({});
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   const [form, setForm] = useState({
     name: userForm.name,

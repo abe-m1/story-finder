@@ -43,6 +43,9 @@ export default async function handler(req, res) {
                   markers: {
                     position: req.body.position,
                     userId: req.body.userId,
+                    userName: req.body.userName,
+                    userImage: saveToCloud.secure_url,
+                    type: 'me',
                   },
                 },
               }
@@ -52,6 +55,9 @@ export default async function handler(req, res) {
                   markers: {
                     position: req.body.position,
                     userId: req.body.userId,
+                    userName: req.body.userName,
+                    userImage: saveToCloud.secure_url,
+                    type: 'me',
                   },
                 },
               };

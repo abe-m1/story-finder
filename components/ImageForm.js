@@ -9,6 +9,7 @@ const ImageForm = ({
   userId,
   onboardStep,
   position,
+  userName,
   forNewPet = true,
 }) => {
   const router = useRouter();
@@ -52,7 +53,13 @@ const ImageForm = ({
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify({ imagePreviewUrl, userId, onboardStep }),
+        body: JSON.stringify({
+          imagePreviewUrl,
+          userId,
+          onboardStep,
+          position,
+          userName,
+        }),
       });
 
       // Throw error with status code in case Fetch API req failed
@@ -131,6 +138,7 @@ const ImageForm = ({
               <button onClick={() => setImagePreviewUrl('')}>remove</button>
             )}
           </div>
+          {imagePreviewUrl && <img className="" src={imagePreviewUrl} />}
         </div>
 
         <button type="submit" className="btn">

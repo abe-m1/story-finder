@@ -27,6 +27,7 @@ const Onboard = () => {
         <ImageForm
           formId="add-user-form"
           userId={user._id}
+          userName={user.name}
           onboardStep={3}
           position={user.position}
           userForm={{ imagePreviewUrl: '' }}

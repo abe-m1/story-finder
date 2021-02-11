@@ -5,6 +5,8 @@ const markerSchema = new mongoose.Schema({
   position: { type: Object },
   userId: { type: String },
   userImage: { type: String },
+  userName: { type: String },
+  type: { type: String },
 });
 
 const UserSchema = new mongoose.Schema({
