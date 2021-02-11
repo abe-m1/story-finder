@@ -10,7 +10,7 @@ const Header = () => {
         <ul>
           <li className="logo">
             <Link href="/">
-              <a>Home</a>
+              <img src="./logo.png" />
             </Link>
           </li>
           {user ? (
@@ -36,7 +36,7 @@ const Header = () => {
               <li>{user.name}</li>
               <li>
                 <img
-                  src={user.image_url}
+                  src={user.image_url || './default-profile.png'}
                   alt="user image"
                   className="profile-pic"
                 />

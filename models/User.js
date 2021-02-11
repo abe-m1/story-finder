@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
+const markerSchema = new mongoose.Schema({
+  position: { type: Object },
+  userId: { type: String },
+  userImage: { type: String },
+});
+
 const UserSchema = new mongoose.Schema({
   username: {
     /* The name of this pet */
@@ -37,6 +43,12 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+
+  position: {
+    type: Object,
+  },
+
+  markers: [markerSchema],
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

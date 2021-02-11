@@ -1,8 +1,9 @@
 import Form from '../components/ProfileForm';
 import ImageForm from '../components/ImageForm';
+import NewConnectionForm from '../components/NewConnectionForm';
 import Layout from '../components/layout';
 import { useUser } from '../lib/hooks';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const Onboard = () => {
   // Fetch the user client-side
@@ -11,6 +12,7 @@ const Onboard = () => {
     name: '',
     age: 0,
     image_url: '',
+    position: {},
   };
 
   // Server-render loading state
@@ -26,6 +28,7 @@ const Onboard = () => {
           formId="add-user-form"
           userId={user._id}
           onboardStep={3}
+          position={user.position}
           userForm={{ imagePreviewUrl: '' }}
         />
       </Layout>
@@ -34,7 +37,12 @@ const Onboard = () => {
   if (user.onboardingStep === 3) {
     return (
       <Layout>
-        <h1>step 3</h1>
+        <NewConnectionForm
+          formId="new-connection-form"
+          userId={user._id}
+          onboardStep={4}
+          userForm={{ imagePreviewUrl: '' }}
+        />
       </Layout>
     );
   }

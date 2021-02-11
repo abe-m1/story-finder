@@ -3,23 +3,21 @@ import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
 
-const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
+const NewConnectionForm = ({
+  formId,
+  userForm,
+  userId,
+  onboardStep,
+  forNewPet = true,
+}) => {
   const router = useRouter();
   const contentType = 'application/json';
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
-  const [position, setPosition] = useState({});
-
-  const [form, setForm] = useState({
-    name: userForm.name,
-    age: userForm.age,
-    image_url: userForm.image_url,
-    onboardingStep: 2,
-  });
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
-    console.log('userId', userId);
     try {
       const res = await fetch(`/api/user/${userId}`, {
         method: 'PATCH',
@@ -27,12 +25,11 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify({ ...form, position }),
+        body: JSON.stringify(form),
       });
 
       // Throw error with status code in case Fetch API req failed
       if (!res.ok) {
-        console.log(res);
         throw new Error(res.status);
       }
 
@@ -41,21 +38,20 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
       // router.push('/');
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update pet');
     }
   };
 
   /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (form) => {
+  const postData = async (imagePreviewUrl) => {
     try {
-      const res = await fetch('/api/user', {
+      const res = await fetch('/api/media', {
         method: 'POST',
         headers: {
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify({ ...form, position }),
+        body: JSON.stringify({ imagePreviewUrl, userId, onboardStep }),
       });
 
       // Throw error with status code in case Fetch API req failed
@@ -85,37 +81,29 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
     e.preventDefault();
     const errs = formValidate();
     if (Object.keys(errs).length === 0) {
-      forNewPet ? postData(form) : putData(form);
+      forNewPet ? postData(imagePreviewUrl) : putData(imagePreviewUrl);
     } else {
       setErrors({ errs });
     }
   };
 
-  const getLocation = () => {
-    const geolocation = navigator.geolocation;
+  const handleImageChange = (e) => {
+    e.preventDefault();
 
-    if (!geolocation) {
-      throw new Error('Not Supported');
-    }
-    geolocation.getCurrentPosition(
-      (position) => {
-        setPosition({
-          lat: position.coords.latitude,
-          long: position.coords.longitude,
-        });
-        console.log(position);
-        return position;
-      },
-      () => {
-        console.log('permission denied');
-      }
-    );
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result);
+    };
+
+    reader.readAsDataURL(file);
   };
 
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
-    if (!form.name) err.name = 'Name is required';
+    // if (!form.imagePreviewUrl) err.name = 'Name is required';
     // if (!form.owner_name) err.owner_name = 'Owner is required';
     // if (!form.species) err.species = 'Species is required';
     // if (!form.image_url) err.image_url = 'Image URL is required';
@@ -125,30 +113,23 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          maxLength="20"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="age">Age</label>
-        <input
-          type="number"
-          name="age"
-          value={form.age}
-          onChange={handleChange}
-        />
-
-        <div className="">
-          <h1>Use Location</h1>
-          <p>Story time would like to user your location</p>
-          <button className="" onClick={getLocation}>
-            Allow
-          </button>
+        <label htmlFor="image">Upload Image</label>
+        <div className="row">
+          <div className="">
+            <div className="">
+              Add image
+              <input
+                className=""
+                type="file"
+                onChange={(e) => handleImageChange(e)}
+              />
+            </div>
+          </div>
+          <div className="">
+            {imagePreviewUrl && (
+              <button onClick={() => setImagePreviewUrl('')}>remove</button>
+            )}
+          </div>
         </div>
 
         <button type="submit" className="btn">
@@ -206,4 +187,4 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
   );
 };
 
-export default ProfileForm;
+export default NewConnectionForm;

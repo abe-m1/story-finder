@@ -8,6 +8,7 @@ const ImageForm = ({
   userForm,
   userId,
   onboardStep,
+  position,
   forNewPet = true,
 }) => {
   const router = useRouter();

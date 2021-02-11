@@ -8,73 +8,65 @@ import React from 'react';
 // import Tree from 'react-d3-tree';
 import dynamic from 'next/dynamic';
 import Tree from 'react-tree-graph';
+import Modal from 'react-modal';
 import 'react-tree-graph/dist/style.css';
 // import handler from './api/pets/[id]';
-
-let data = {
-  name: 'Parent',
-  id: 4545454,
-
-  nodeProps: {
-    href: 'Logo1.png',
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
   },
-  children: [
-    {
-      name: 'Child One5',
-      id: 1546564,
-      gProps: {
-        className: 'red-node',
-        onClick: (event, node) => alert(`Clicked ${node}!`),
-      },
-    },
-    {
-      name: 'Child Two',
-      id: 34534545,
-    },
-  ],
-};
-
-// const Tree = dynamic(() => import('react-d3-tree'), { ssr: false });
-
-const orgChart = {
-  name: 'CEO',
-  children: [
-    {
-      name: 'Manager',
-      attributes: {
-        department: 'Production',
-      },
-      children: [
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Fabrication',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-        {
-          name: 'Foreman',
-          attributes: {
-            department: 'Assembly',
-          },
-          children: [
-            {
-              name: 'Worker',
-            },
-          ],
-        },
-      ],
-    },
-  ],
 };
 
 const FamilyTree = () => {
+  let data = {
+    name: 'Parent',
+    id: 4545454,
+
+    nodeProps: {
+      href: 'Logo1.png',
+    },
+    children: [
+      {
+        name: 'Child One5',
+        id: 1546564,
+        gProps: {
+          className: 'red-node',
+          onClick: (e, n) => openModal(e, n),
+          // onClick: (event, node) => alert(`Clicked ${node}!`),
+        },
+      },
+      {
+        name: 'Child Two',
+        id: 34534545,
+      },
+    ],
+  };
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [selectedNode, setSelectedNode] = React.useState('');
+  function openModal(e, n) {
+    console.log('in here', n);
+    setIsOpen(true);
+    setSelectedNode(n);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   function hand(e, k, r) {
     console.log('clicked', e, k, r);
+    setIsOpen(true);
   }
   return (
     <Layout>
@@ -88,6 +80,19 @@ const FamilyTree = () => {
         //   onClick: hand,
         // }}
       />
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h2>Modal</h2>
+        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
+        <button onClick={closeModal}>close</button>
+        <div>I am selected Node {selectedNode}</div>
+        <button>add Node</button>
+      </Modal>
       <style jsx>{`
         .linage {
           fill: none;

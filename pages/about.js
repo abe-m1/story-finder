@@ -39,7 +39,7 @@ const About = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="back">
         <button onClick={openModal}>Open Modal</button>
         <Modal
           isOpen={modalIsOpen}

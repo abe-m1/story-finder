@@ -7,21 +7,15 @@ const Home = () => {
   return (
     <Layout>
       <div className="back">
-        <h1>Home</h1>
+        <div>
+          <img src="./main-name.png"></img>
+        </div>
 
         <p>Steps to test the example:</p>
 
-        <ol>
-          <li>Click Login and enter a username and password.</li>
-          <li>
-            You'll be redirected to Home. Click on Profile, notice how your
-            session is being used through a token stored in a cookie.
-          </li>
-          <li>
-            Click Logout and try to go to Profile again. You'll get redirected
-            to Login.
-          </li>
-        </ol>
+        <p>Discover stories and experiences and be inspired by them</p>
+        <button>Learn More</button>
+        <button>Login</button>
 
         {user && (
           <>

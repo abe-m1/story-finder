@@ -39,8 +39,22 @@ export default async function handler(req, res) {
             ? {
                 image_url: saveToCloud.secure_url,
                 onboardingStep: req.body.onboardStep,
+                $push: {
+                  markers: {
+                    position: req.body.position,
+                    userId: req.body.userId,
+                  },
+                },
               }
-            : { image_url: saveToCloud.secure_url };
+            : {
+                image_url: saveToCloud.secure_url,
+                $push: {
+                  markers: {
+                    position: req.body.position,
+                    userId: req.body.userId,
+                  },
+                },
+              };
           console.log(newData);
           const user = await User.findByIdAndUpdate(req.body.userId, newData, {
             // new: true,
