@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/layout';
-import Form from '../components/form';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';

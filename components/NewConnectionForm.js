@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 const NewConnectionForm = ({
   formId,
@@ -15,8 +19,27 @@ const NewConnectionForm = ({
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+  const [locationName, setLocationName] = useState('');
+  const [geoResults, setGeoResults] = useState({});
+  const [coords, setCoords] = useState({});
 
   /* The PUT method edits an existing entry in the mongodb database. */
+  const handleChange1 = (locName) => {
+    setLocationName(locName);
+  };
+
+  const handleSelect = (locationName) => {
+    setLocationName(locationName);
+    geocodeByAddress(locationName)
+      .then((results) => {
+        setGeoResults(results[0]);
+
+        return getLatLng(results[0]);
+      })
+      .then((latLng) => setCoords(latLng))
+      .catch((error) => console.error('Error', error));
+  };
+
   const putData = async (form) => {
     try {
       const res = await fetch(`/api/user/${userId}`, {
@@ -113,6 +136,48 @@ const NewConnectionForm = ({
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
+        <div className="">
+          <PlacesAutocomplete
+            value={locationName}
+            onChange={handleChange1}
+            onSelect={handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+              <div>
+                <input
+                  {...getInputProps({
+                    placeholder: 'Search Places ...',
+                    className: '',
+                  })}
+                />
+                <div className="autocomplete-dropdown-container">
+                  {suggestions.map((suggestion) => {
+                    const className = suggestion.active
+                      ? 'suggestion-item--active'
+                      : 'suggestion-item';
+                    // inline style for demonstration purpose
+                    const style = suggestion.active
+                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                    return (
+                      <div
+                        className="autocomplete-dropdown-content"
+                        {...getSuggestionItemProps(suggestion, {
+                          className,
+                          style,
+                        })}
+                      >
+                        <span className="suggested-places">
+                          {suggestion.description}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
+        </div>
         <label htmlFor="image">Upload Image</label>
         <div className="row">
           <div className="">

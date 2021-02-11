@@ -20,6 +20,7 @@
     "react-dom": "latest",
     "react-google-maps": "^9.4.5",
     "react-modal": "^3.12.1",
+    "react-places-autocomplete": "^7.3.0",
     "react-tree-graph": "^6.0.0",
     "swr": "0.3.0",
     "uuid": "8.3.1"
