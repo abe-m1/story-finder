@@ -72,7 +72,7 @@ const orgChart = {
   ],
 };
 
-const FamilyTree = () => {
+const About = () => {
   function hand(e, k, r) {
     console.log('clicked', e, k, r);
   }
@@ -129,4 +129,4 @@ const FamilyTree = () => {
   );
 };
 
-export default FamilyTree;
+export default About;

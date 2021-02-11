@@ -4,23 +4,6 @@ import Header from './header';
 const Layout = (props) => (
   <>
     <Head>
-      <script
-        type="text/javascript"
-        src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"
-      ></script>
-
-      {/* <script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"
-      ></script> */}
-      <script
-        type="text/javascript"
-        src="https://d3js.org/d3.v4.min.js"
-      ></script>
-      <script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/d3-dtree@2.4.1/dist/dTree.min.js"
-      ></script>
       <title>Story App</title>
     </Head>
 
