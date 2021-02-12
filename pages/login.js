@@ -43,9 +43,9 @@ const Login = () => {
           <h2>Sign in</h2>
           <Form isLogin errorMessage={errorMsg} onSubmit={handleSubmit} />
         </div>
-        <a href="https://www.freepik.com/vectors/background">
+        {/* <a href="https://www.freepik.com/vectors/background">
           Background vector created by rawpixel.com - www.freepik.com
-        </a>
+        </a> */}
         <style jsx>{`
           .login {
             max-width: 21rem;
