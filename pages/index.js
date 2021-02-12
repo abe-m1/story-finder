@@ -7,19 +7,23 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="back">
-        <div className="hero">
-          <img className="main-image" src="./main-name.png"></img>
-          <p className="slogan">
-            Discover stories and experiences and be inspired by them
-          </p>
-          <Link href="/about">
-            <button className="learn-more">Learn More</button>
-          </Link>
-          <Link href="/login">
-            <button className="login">Login</button>
-          </Link>
-        </div>
+      <div className="container">
+        {!user && (
+          <div className="back">
+            <div className="hero">
+              <img className="main-image" src="./main-name.png"></img>
+              <p className="slogan">
+                Discover stories and experiences and be inspired by them
+              </p>
+              <Link href="/about">
+                <button className="learn-more">Learn More</button>
+              </Link>
+              <Link href="/login">
+                <button className="login">Login</button>
+              </Link>
+            </div>
+          </div>
+        )}
 
         {user && (
           <>
@@ -29,6 +33,9 @@ const Home = () => {
         )}
 
         <style jsx>{`
+          .container {
+            height: 100%;
+          }
           .back {
             padding: 3rem;
             background: url('./bg-pattern1.jpg');

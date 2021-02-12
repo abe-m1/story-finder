@@ -4,6 +4,7 @@ import { useUser } from '../lib/hooks';
 import Layout from '../components/layout';
 import React from 'react';
 import challenges from '../public/data.json';
+import ChallengeItem from '../components/challengeItem';
 
 const Challenges = () => {
   const user = useUser({ redirectTo: '/login' });
@@ -13,16 +14,20 @@ const Challenges = () => {
   }
   return (
     <Layout>
-      <div>
+      <div className="container">
         {challenges.map((challenge, i) => {
           if (i <= user.nextChallengeIndex) {
-            return <p>{challenge.challengeName}</p>;
+            // return <p>{challenge.challengeName}</p>;
+            return <ChallengeItem challenge={challenge} />;
           }
-          return <p>{challenge.challengeName}*</p>;
+          return <ChallengeItem challenge={challenge} />;
+          // return <p>{challenge.challengeName}*</p>;
         })}
       </div>
       <style jsx>{`
-
+          .container {
+            padding-top: 3rem;
+          }
         }
       `}</style>
     </Layout>
