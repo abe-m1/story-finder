@@ -5,6 +5,7 @@ const Layout = (props) => (
   <>
     <Head>
       <title>Story App</title>
+      <script src="https://unpkg.com/opencage-api-client"></script>
       <script
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_KEY}&libraries=places`}
       ></script>

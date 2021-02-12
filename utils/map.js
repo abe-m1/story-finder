@@ -9,12 +9,19 @@ import {
 
 const Map = withScriptjs(
   withGoogleMap((props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const handleToggleOpen = () => {
-      setIsOpen(true);
+    const [isOpen, setIsOpen] = useState({});
+    const handleToggleOpen = (i) => {
+      setIsOpen({
+        ...isOpen,
+        [i]: true,
+      });
     };
 
-    const handleToggleClose = () => {
+    const handleToggleClose = (i) => {
+      setIsOpen({
+        ...isOpen,
+        [i]: false,
+      });
       setIsOpen(false);
     };
     return (
@@ -27,12 +34,12 @@ const Map = withScriptjs(
                 key={i}
                 position={{
                   lat: marker.position.lat,
-                  lng: marker.position.long,
+                  lng: marker.position.lng,
                 }}
-                onClick={() => handleToggleOpen()}
+                onClick={() => handleToggleOpen(i)}
               >
-                {isOpen && (
-                  <InfoWindow onCloseClick={() => handleToggleClose()}>
+                {isOpen[i] && (
+                  <InfoWindow onCloseClick={() => handleToggleClose(i)}>
                     <>
                       <img style={{ width: '40px' }} src={marker.userImage} />
                       <p>{marker.userName}</p>

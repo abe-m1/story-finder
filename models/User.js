@@ -14,6 +14,13 @@ const challengesSchema = new mongoose.Schema({
   type: { type: String },
 });
 
+const connectionSchema = new mongoose.Schema({
+  name: { type: String },
+  connectionType: { type: String },
+  connectionImage: { type: String },
+  position: { type: Object },
+});
+
 const UserSchema = new mongoose.Schema({
   username: {
     /* The name of this pet */
@@ -59,7 +66,7 @@ const UserSchema = new mongoose.Schema({
     default: 0,
   },
   tree: { type: String },
-
+  connections: [connectionSchema],
   markers: [markerSchema],
   challenges: [challengesSchema],
 });

@@ -22,7 +22,10 @@ const NewConnectionForm = ({
   const [locationName, setLocationName] = useState('');
   const [geoResults, setGeoResults] = useState({});
   const [coords, setCoords] = useState({});
-
+  const [form, setForm] = useState({
+    name: userForm.name,
+    connection: userForm.connection,
+  });
   /* The PUT method edits an existing entry in the mongodb database. */
   const handleChange1 = (locName) => {
     setLocationName(locName);
@@ -67,14 +70,43 @@ const NewConnectionForm = ({
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (imagePreviewUrl) => {
+    //
+    const geoResult = await opencage.geocode({
+      q: locationName,
+      key: '7366e3ec71b04c7989dec9bb0033fb90',
+      no_annotations: 1,
+      limit: 1,
+    });
+
+    if (geoResult) {
+      console.log(geoResult);
+      setCoords(geoResult.results[0].geometry);
+    }
+    // .then((data) => {
+    //   // console.log(JSON.stringify(data));
+    //   console.log(data.results[0].geometry);
+    //   setCoords(data.results[0].geometry);
+    // })
+    // .catch((error) => {
+    //   console.log('error', error.message);
+    // });
+    //
+    console.log('this is form', form, userId, coords, locationName);
     try {
-      const res = await fetch('/api/media', {
+      console.log();
+      const res = await fetch('/api/connection', {
         method: 'POST',
         headers: {
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify({ imagePreviewUrl, userId, onboardStep }),
+        body: JSON.stringify({
+          ...form,
+          imagePreviewUrl,
+          locationName,
+          coords: geoResult.results[0].geometry,
+          userId,
+        }),
       });
 
       // Throw error with status code in case Fetch API req failed
@@ -84,6 +116,7 @@ const NewConnectionForm = ({
 
       router.push('/onboard');
     } catch (error) {
+      console.log(error);
       setMessage('Failed to add pet');
     }
   };
@@ -96,8 +129,32 @@ const NewConnectionForm = ({
 
     setForm({
       ...form,
-      [name]: value,
+      [name]: target.value,
     });
+  };
+
+  const handleChange2 = (e) => {
+    setLocationName(e.target.value);
+  };
+
+  const handleSubmit1 = (e) => {
+    e.preventDefault();
+    console.log('handling submit');
+    opencage
+      .geocode({
+        q: locationName,
+        key: process.env.GEOCODE_KEY,
+        no_annotations: 1,
+        limit: 1,
+      })
+      .then((data) => {
+        // console.log(JSON.stringify(data));
+        console.log(data.results[0].geometry);
+        setCoords(data.results[0].geometry);
+      })
+      .catch((error) => {
+        console.log('error', error.message);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -135,72 +192,62 @@ const NewConnectionForm = ({
 
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit}>
-        <div className="container">
-          <PlacesAutocomplete
-            value={locationName}
-            onChange={handleChange1}
-            onSelect={handleSelect}
-          >
-            {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-              <div>
-                <input
-                  {...getInputProps({
-                    placeholder: 'Search Places ...',
-                    className: '',
-                  })}
-                />
-                <div className="autocomplete-dropdown-container">
-                  {suggestions.map((suggestion) => {
-                    const className = suggestion.active
-                      ? 'suggestion-item--active'
-                      : 'suggestion-item';
-                    // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                    return (
-                      <div
-                        className="autocomplete-dropdown-content"
-                        {...getSuggestionItemProps(suggestion, {
-                          className,
-                          style,
-                        })}
-                      >
-                        <span className="suggested-places">
-                          {suggestion.description}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
-        </div>
-        <label htmlFor="image">Upload Image</label>
-        <div className="row">
-          <div className="">
+      <div className="container">
+        <form id={formId} onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Location</label>
+            <input
+              type="text"
+              maxLength="20"
+              name="name"
+              value={locationName}
+              onChange={handleChange2}
+              required
+            />
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              maxLength="20"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="name">Type of connection</label>
+            <input
+              type="text"
+              maxLength="20"
+              name="name"
+              value={form.connection}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <label htmlFor="image">Upload Image</label>
+          <div className="row">
             <div className="">
-              Add image
-              <input
-                className=""
-                type="file"
-                onChange={(e) => handleImageChange(e)}
-              />
+              <div className="">
+                Add image
+                <input
+                  className=""
+                  type="file"
+                  onChange={(e) => handleImageChange(e)}
+                />
+              </div>
+            </div>
+            <div className="">
+              {imagePreviewUrl && (
+                <button onClick={() => setImagePreviewUrl('')}>remove</button>
+              )}
             </div>
           </div>
-          <div className="">
-            {imagePreviewUrl && (
-              <button onClick={() => setImagePreviewUrl('')}>remove</button>
-            )}
-          </div>
-        </div>
 
-        <button type="submit" className="btn">
-          Submit
-        </button>
-      </form>
+          <button type="submit" className="btn">
+            Submit
+          </button>
+        </form>
+      </div>
       <p>{message}</p>
       <div>
         {Object.keys(errors).map((err, index) => (
@@ -250,7 +297,8 @@ const NewConnectionForm = ({
         .container {
           padding: 3rem;
           background-color: #fff;
-          height: 100%;
+          height: 60%;
+          width: 60%;
         }
       `}</style>
     </>

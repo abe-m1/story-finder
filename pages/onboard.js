@@ -24,7 +24,7 @@ const Onboard = () => {
 
   const advanceScreen = () => {
     console.log('advanced screen fired', user.onboardingStep);
-    setStep(step + 1);
+    setStep(user.onboardingStep);
   };
 
   // Server-render loading state
@@ -89,6 +89,12 @@ const Onboard = () => {
           userForm={petForm}
           advanceScreen={advanceScreen}
         />
+        {/* <NewConnectionForm
+          formId="new-connection-form"
+          userId={user._id}
+          onboardStep={4}
+          userForm={{ imagePreviewUrl: '' }}
+        /> */}
       </div>
       <style jsx>{`
         .login {

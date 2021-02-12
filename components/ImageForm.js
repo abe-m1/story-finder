@@ -67,10 +67,16 @@ const ImageForm = ({
       if (!res.ok) {
         throw new Error(res.status);
       }
+
+      const { data } = await res.json();
+
+      mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
+
+      // router.push('/');
       if (advanceScreen) {
         advanceScreen();
       }
-      router.push('/onboard');
+      // router.push('/onboard');
     } catch (error) {
       setMessage('Failed to add pet');
     }

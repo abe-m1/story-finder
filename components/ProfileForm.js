@@ -109,7 +109,7 @@ const ProfileForm = ({
       (position) => {
         setPosition({
           lat: position.coords.latitude,
-          long: position.coords.longitude,
+          lng: position.coords.longitude,
         });
         console.log(position);
         return position;
@@ -134,7 +134,7 @@ const ProfileForm = ({
     <>
       <div className="container">
         <form id={formId} onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">What is your name</label>
           <input
             type="text"
             maxLength="20"
@@ -152,8 +152,8 @@ const ProfileForm = ({
             onChange={handleChange}
           />
 
-          <div className="">
-            <h1>Use Location</h1>
+          <div className="location-box">
+            <label htmlFor="name">Where are you located?</label>
             <p>Story time would like to user your location</p>
             <button className="" onClick={getLocation}>
               Allow
@@ -176,6 +176,9 @@ const ProfileForm = ({
           width: 60%;
           margin: auto;
           max-width: 550px;
+          background-color: #fff;
+          padding: 2rem;
+          border-radius: 10px;
         }
         input,
         form button,
@@ -211,12 +214,17 @@ const ProfileForm = ({
         .form-container {
           width: 60%;
         }
-        .container {
-          padding: 3rem;
-          background-color: #fff;
-          height: 100%;
-          width: 50%;
-          border-radius: 10px;
+        // .container {
+        //   padding: 3rem;
+        //   background-color: #fff;
+        //   height: 100%;
+        //   width: 40%;
+        //   border-radius: 10px;
+        // }
+        .location-box {
+          padding: 1rem;
+          border: 1px solid #ebebeb;
+          margin-top: 1rem;
         }
       `}</style>
     </>

@@ -34,33 +34,26 @@ export default async function handler(req, res) {
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
 
         if (saveToCloud) {
-          console.log('reeq body', req.body);
-          const newData = req.body.onboardStep
-            ? {
-                image_url: saveToCloud.secure_url,
-                onboardingStep: req.body.onboardStep,
-                $push: {
-                  markers: {
-                    position: req.body.position,
-                    userId: req.body.userId,
-                    userName: req.body.userName,
-                    userImage: saveToCloud.secure_url,
-                    type: 'me',
-                  },
-                },
-              }
-            : {
-                // image_url: saveToCloud.secure_url,
-                $push: {
-                  markers: {
-                    position: req.body.position,
-                    userId: req.body.userId,
-                    userName: req.body.userName,
-                    userImage: saveToCloud.secure_url,
-                    type: 'connection',
-                  },
-                },
-              };
+          // console.log('reeq body', req.body);
+          const newData = {
+            $push: {
+              connections: {
+                position: req.body.coords,
+                // userId: req.body.userId,
+                name: req.body.name,
+                connectionImage: saveToCloud.secure_url,
+                connectionType: req.body.connection,
+                type: 'relative',
+              },
+              markers: {
+                position: req.body.coords,
+                userId: req.body.userId,
+                userName: req.body.name,
+                userImage: saveToCloud.secure_url,
+                type: 'connection',
+              },
+            },
+          };
           console.log(newData);
           const user = await User.findByIdAndUpdate(req.body.userId, newData, {
             // new: true,
