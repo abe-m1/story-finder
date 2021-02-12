@@ -9,6 +9,11 @@ const markerSchema = new mongoose.Schema({
   type: { type: String },
 });
 
+const challengesSchema = new mongoose.Schema({
+  challengeNumber: { type: Number },
+  type: { type: String },
+});
+
 const UserSchema = new mongoose.Schema({
   username: {
     /* The name of this pet */
@@ -49,8 +54,14 @@ const UserSchema = new mongoose.Schema({
   position: {
     type: Object,
   },
+  nextChallengeIndex: {
+    type: Number,
+    default: 0,
+  },
+  tree: { type: String },
 
   markers: [markerSchema],
+  challenges: [challengesSchema],
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);
