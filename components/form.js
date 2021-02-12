@@ -30,7 +30,9 @@ const Form = ({ isLogin, errorMessage, onSubmit }) => (
           <Link href="/login">
             <a>I already have an account</a>
           </Link>
-          <button type="submit">Signup</button>
+          <button className="button" type="submit">
+            Signup
+          </button>
         </>
       )}
     </div>
@@ -64,9 +66,10 @@ const Form = ({ isLogin, errorMessage, onSubmit }) => (
       .submit > button {
         padding: 0.5rem 1rem;
         cursor: pointer;
-        background: #fff;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        background: #2bd1d1;
+        border: none;
+        border-radius: 7px;
+        color: #fff;
       }
       .submit > button:hover {
         border-color: #888;

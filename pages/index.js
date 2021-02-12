@@ -27,7 +27,8 @@ const Home = () => {
         <style jsx>{`
           .back {
             padding: 3rem;
-            background-image: url('./back.jpg');
+            background: url('./bg-pattern1.jpg');
+            background-size: cover;
             height: 100%;
           }
           li {

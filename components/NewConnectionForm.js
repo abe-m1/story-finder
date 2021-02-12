@@ -136,7 +136,7 @@ const NewConnectionForm = ({
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
-        <div className="">
+        <div className="container">
           <PlacesAutocomplete
             value={locationName}
             onChange={handleChange1}
@@ -246,6 +246,11 @@ const NewConnectionForm = ({
 
         .form-container {
           width: 90%;
+        }
+        .container {
+          padding: 3rem;
+          background-color: #fff;
+          height: 100%;
         }
       `}</style>
     </>

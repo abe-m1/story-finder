@@ -3,7 +3,13 @@ import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
 
-const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
+const ProfileForm = ({
+  formId,
+  userForm,
+  userId,
+  forNewPet = false,
+  advanceScreen,
+}) => {
   const router = useRouter();
   const contentType = 'application/json';
   const [errors, setErrors] = useState({});
@@ -41,6 +47,7 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
 
       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
       // router.push('/');
+      advanceScreen();
     } catch (error) {
       console.log(error);
       setMessage('Failed to update pet');
@@ -125,46 +132,48 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
 
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          maxLength="20"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
+      <div className="container">
+        <form id={formId} onSubmit={handleSubmit}>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            maxLength="20"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="age">Age</label>
-        <input
-          type="number"
-          name="age"
-          value={form.age}
-          onChange={handleChange}
-        />
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            name="age"
+            value={form.age}
+            onChange={handleChange}
+          />
 
-        <div className="">
-          <h1>Use Location</h1>
-          <p>Story time would like to user your location</p>
-          <button className="" onClick={getLocation}>
-            Allow
+          <div className="">
+            <h1>Use Location</h1>
+            <p>Story time would like to user your location</p>
+            <button className="" onClick={getLocation}>
+              Allow
+            </button>
+          </div>
+
+          <button type="submit" className="btn">
+            Submit
           </button>
+        </form>
+        <p>{message}</p>
+        <div>
+          {Object.keys(errors).map((err, index) => (
+            <li key={index}>{err}</li>
+          ))}
         </div>
-
-        <button type="submit" className="btn">
-          Submit
-        </button>
-      </form>
-      <p>{message}</p>
-      <div>
-        {Object.keys(errors).map((err, index) => (
-          <li key={index}>{err}</li>
-        ))}
       </div>
       <style jsx>{`
         form {
-          width: 90%;
+          width: 60%;
           margin: auto;
           max-width: 550px;
         }
@@ -200,7 +209,14 @@ const ProfileForm = ({ formId, userForm, userId, forNewPet = false }) => {
         }
 
         .form-container {
-          width: 90%;
+          width: 60%;
+        }
+        .container {
+          padding: 3rem;
+          background-color: #fff;
+          height: 100%;
+          width: 50%;
+          border-radius: 10px;
         }
       `}</style>
     </>

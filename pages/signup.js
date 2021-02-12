@@ -45,6 +45,7 @@ const Signup = () => {
     <Layout>
       <div className="page">
         <div className="login">
+          <h2>Signup</h2>
           <Form
             isLogin={false}
             errorMessage={errorMsg}
@@ -64,7 +65,7 @@ const Signup = () => {
         }
         .page {
           padding: 3rem;
-          background-image: url('./bg-pattern2.png');
+          background-image: url('./bg-pattern4.jpg');
           height: 100%;
         }
       `}</style>

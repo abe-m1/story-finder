@@ -40,21 +40,26 @@ const Login = () => {
     <Layout>
       <div className="page">
         <div className="login">
+          <h2>Sign in</h2>
           <Form isLogin errorMessage={errorMsg} onSubmit={handleSubmit} />
         </div>
+        <a href="https://www.freepik.com/vectors/background">
+          Background vector created by rawpixel.com - www.freepik.com
+        </a>
         <style jsx>{`
           .login {
             max-width: 21rem;
             margin: 0 auto;
             padding: 1rem;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 10px;
             background-color: #fff;
             margin-top: 7rem;
           }
           .page {
             padding: 3rem;
-            background-image: url('./bg-pattern1.png');
+            background-image: url('./bg-pattern3.jpg');
+            background-size: cover;
             height: 100%;
           }
         `}</style>

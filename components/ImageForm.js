@@ -10,6 +10,7 @@ const ImageForm = ({
   onboardStep,
   position,
   userName,
+  advanceScreen,
   forNewPet = true,
 }) => {
   const router = useRouter();
@@ -66,7 +67,9 @@ const ImageForm = ({
       if (!res.ok) {
         throw new Error(res.status);
       }
-
+      if (advanceScreen) {
+        advanceScreen();
+      }
       router.push('/onboard');
     } catch (error) {
       setMessage('Failed to add pet');
