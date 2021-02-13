@@ -29,6 +29,7 @@ export default async function handler(req, res) {
       }
       break;
     case 'POST':
+      console.log('in api', req.body);
       try {
         const publicID = `story-${Math.random().toString(24).slice(-8)}`;
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
