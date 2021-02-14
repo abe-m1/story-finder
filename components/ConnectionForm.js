@@ -177,7 +177,7 @@ const Demo = ({
 
       const geoResult = await opencage.geocode({
         q: form.location,
-        key: process.env.GEOCODE_KEY,
+        key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
         no_annotations: 1,
         limit: 1,
       });

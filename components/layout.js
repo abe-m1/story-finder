@@ -14,7 +14,9 @@ const Layout = (props) => (
     <Header />
 
     <main>
-      <div className="container">{props.children}</div>
+      <div className="container" style={{ height: '95vh' }}>
+        {props.children}
+      </div>
     </main>
 
     <style jsx global>{`
@@ -36,7 +38,6 @@ const Layout = (props) => (
 
         margin: 0 auto;
         // padding: 2rem 1.25rem;
-        height: 95vh;
       }
     `}</style>
   </>

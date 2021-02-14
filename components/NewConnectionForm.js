@@ -75,7 +75,7 @@ const NewConnectionForm = ({
     //
     const geoResult = await opencage.geocode({
       q: locationName,
-      key: process.env.GEOCODE_KEY,
+      key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
       no_annotations: 1,
       limit: 1,
     });
@@ -138,7 +138,7 @@ const NewConnectionForm = ({
     opencage
       .geocode({
         q: locationName,
-        key: process.env.GEOCODE_KEY,
+        key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
         no_annotations: 1,
         limit: 1,
       })

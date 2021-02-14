@@ -431,6 +431,7 @@ const About = () => {
           margin: auto;
           margin-bottom: 12rem;
           position: relative;
+          margin-top: 2rem;
         }
         @media (max-width: 600px) {
           .hero {
