@@ -207,9 +207,9 @@ const Demo = ({
       }
 
       const { data } = await res.json();
-      onSuccessSubmit();
 
-      mutate(`/api/uer/${userId}`, data, false); // Update the local data without a revalidation
+      mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
+      onSuccessSubmit(data);
       setScreen(screen + 1);
       // router.push('/');
     } catch (error) {

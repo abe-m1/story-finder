@@ -47,6 +47,9 @@ class ImgDialog extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  onSuccessSubmit = (data) => {
+    this.props.onSuccessSubmit(data);
+  };
 
   render() {
     const { classes, userId } = this.props;
@@ -81,7 +84,7 @@ class ImgDialog extends React.Component {
         <ConnectionForm
           formId="new-connection-form"
           userId={userId}
-          onSuccessSubmit={this.props.onSuccessSubmit}
+          onSuccessSubmit={this.onSuccessSubmit}
           onboardStep={4}
           userForm={{ imagePreviewUrl: '' }}
         />

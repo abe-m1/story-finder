@@ -236,7 +236,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { getOrientation } from 'get-orientation/browser';
-import ImgDialog from '../components/ImgDialog';
+import ConnectionDialog from '../components/ConnectionDialog';
 import { getCroppedImg, getRotatedImage } from '../components/canvasUtils';
 import { styles } from '../components/styles';
 import Layout from '../components/layout';
@@ -252,7 +252,14 @@ const ORIENTATION_TO_ANGLE = {
   8: -90,
 };
 
-const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
+const Demo = ({
+  classes,
+  formId,
+  userForm,
+  userId,
+  forNewUser = false,
+  user,
+}) => {
   const contentType = 'application/json';
   const router = useRouter();
   const [errors, setErrors] = useState({});
@@ -278,6 +285,7 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
   const [screen, setScreen] = useState(1);
   const [addConnection, setAddConnection] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [connections, setConnections] = useState([]);
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -301,7 +309,10 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
     setAddConnection(false);
   }, []);
 
-  const onSuccessSubmit = () => {
+  const onSuccessSubmit = (data) => {
+    console.log('on su submit', data);
+    //TODO get data more directly instead of passing up props
+    setConnections(data.connections);
     setAddConnection(false);
   };
 
@@ -594,13 +605,20 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
             Add Connections
             <button onClick={() => setAddConnection(true)}>Add</button>
             <button onClick={finishOnboard}>Start first assignment</button>
-            <ImgDialog
+            {connections.length}
+            {/* <ImgDialog
               img={croppedImage}
               userId={userId}
               onSuccessSubmit={onSuccessSubmit}
               addConnection={addConnection}
               onClose={onClose}
               onSelect={onSelect}
+            /> */}
+            <ConnectionDialog
+              userId={userId}
+              onSuccessSubmit={onSuccessSubmit}
+              addConnection={addConnection}
+              onClose={onClose}
             />
           </div>
         )}

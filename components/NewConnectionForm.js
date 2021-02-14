@@ -66,6 +66,7 @@ const NewConnectionForm = ({
       onSuccessSubmit();
       // router.push('/');
     } catch (error) {
+      console.log(error);
       setMessage('Failed to update pet');
     }
   };
@@ -111,8 +112,13 @@ const NewConnectionForm = ({
         throw new Error(res.status);
       }
 
-      onSuccessSubmit();
+      const { data } = await res.json();
+
+      mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
+
+      onSuccessSubmit(data);
     } catch (error) {
+      console.log(error);
       setMessage('Failed to add pet');
     }
   };
