@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
-import NewConnectionForm from '../components/NewConnectionForm';
+import ConnectionForm from '../components/ConnectionForm';
 
 const styles = {
   appBar: {
@@ -71,21 +71,21 @@ class ImgDialog extends React.Component {
               color="inherit"
               className={classes.flex}
             >
-              Cropped image
+              Add New Connection
             </Typography>
           </Toolbar>
         </AppBar>
         {/* <div className={classes.imgContainer}>
           <img src={this.props.img} alt="Cropped" className={classes.img} />
         </div> */}
-        <NewConnectionForm
+        <ConnectionForm
           formId="new-connection-form"
           userId={userId}
           onSuccessSubmit={this.props.onSuccessSubmit}
           onboardStep={4}
           userForm={{ imagePreviewUrl: '' }}
         />
-        <Button onClick={this.props.onSelect}>Choose</Button>
+        {/* <Button onClick={this.props.onSelect}>Choose</Button> */}
       </Dialog>
     );
   }

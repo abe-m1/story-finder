@@ -38,6 +38,7 @@ export default async function handler(req, res) {
           console.log('reeq body', req.body);
           const newData = req.body.onboardStep
             ? {
+                name: req.body.userName,
                 image_url: saveToCloud.secure_url,
                 onboardingStep: req.body.onboardStep,
                 $push: {

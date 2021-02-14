@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/layout';
 import Form from '../components/form';
-
+let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const Signup = () => {
   useUser({ redirectTo: '/', redirectIfFound: true });
 

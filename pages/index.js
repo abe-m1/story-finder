@@ -1,9 +1,21 @@
 import { useUser } from '../lib/hooks';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Layout from '../components/layout';
+import ConnectionDialog from '../components/connectionDialog';
 
 const Home = () => {
   const user = useUser();
+  const [addConnection, setAddConnection] = useState(false);
+
+  const onSuccessSubmit = () => {
+    console.log('on success fired');
+    setAddConnection(false);
+  };
+
+  const onClose = useCallback(() => {
+    setAddConnection(false);
+  }, []);
 
   return (
     <Layout>
@@ -26,10 +38,19 @@ const Home = () => {
         )}
 
         {user && (
-          <>
-            <p>Currently logged in as:</p>
-            <pre>{JSON.stringify(user, null, 2)}</pre>
-          </>
+          <div>
+            Add Connections
+            <button onClick={() => setAddConnection(true)}>Add</button>
+            <Link href="/challenges">
+              <button>View Challenges</button>
+            </Link>
+            <ConnectionDialog
+              userId={user._id}
+              onSuccessSubmit={onSuccessSubmit}
+              addConnection={addConnection}
+              onClose={onClose}
+            />
+          </div>
         )}
 
         <style jsx>{`
@@ -38,7 +59,7 @@ const Home = () => {
           }
           .back {
             padding: 3rem;
-            background: url('./bg-pattern1.jpg');
+            background: url('./bg-pattern1a.jpg');
             background-size: cover;
             height: 100%;
           }

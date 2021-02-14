@@ -12,6 +12,7 @@ const NewConnectionForm = ({
   userForm,
   userId,
   onboardStep,
+  onSuccessSubmit,
   forNewPet = true,
 }) => {
   const router = useRouter();
@@ -62,8 +63,10 @@ const NewConnectionForm = ({
       const { data } = await res.json();
 
       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
+      onSuccessSubmit();
       // router.push('/');
     } catch (error) {
+      console.log(error);
       setMessage('Failed to update pet');
     }
   };
@@ -73,7 +76,7 @@ const NewConnectionForm = ({
     //
     const geoResult = await opencage.geocode({
       q: locationName,
-      key: '7366e3ec71b04c7989dec9bb0033fb90',
+      key: process.env.GEOCODE_KEY,
       no_annotations: 1,
       limit: 1,
     });
@@ -94,7 +97,7 @@ const NewConnectionForm = ({
     console.log('this is form', form, userId, coords, locationName);
     try {
       console.log();
-      const res = await fetch('/api/connection', {
+      const res = await fetch('/api/geo', {
         method: 'POST',
         headers: {
           Accept: contentType,
@@ -114,7 +117,7 @@ const NewConnectionForm = ({
         throw new Error(res.status);
       }
 
-      router.push('/onboard');
+      onSuccessSubmit();
     } catch (error) {
       console.log(error);
       setMessage('Failed to add pet');
@@ -298,7 +301,7 @@ const NewConnectionForm = ({
           padding: 3rem;
           background-color: #fff;
           height: 60%;
-          width: 60%;
+          // width: 60%;
         }
       `}</style>
     </>
