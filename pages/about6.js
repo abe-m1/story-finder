@@ -23,7 +23,6 @@ const Onboard = () => {
   }, [step]);
 
   const advanceScreen = () => {
-    console.log('advanced screen fired', user.onboardingStep);
     setStep(user.onboardingStep);
   };
 

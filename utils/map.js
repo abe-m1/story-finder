@@ -28,7 +28,6 @@ const Map = withScriptjs(
       <GoogleMap defaultZoom={2} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
         {props.isMarkerShown &&
           props.userMarkers.map((marker, i) => {
-            console.log(marker.position);
             return (
               <Marker
                 key={i}

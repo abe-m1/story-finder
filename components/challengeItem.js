@@ -1,5 +1,4 @@
 const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
-  console.log('CH', challenge.challengeDescription);
   return (
     <li className="item-container">
       <div>

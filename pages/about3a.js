@@ -53,8 +53,6 @@ const Demo = ({ classes }) => {
   }, []);
 
   const onSelect = async () => {
-    console.log(croppedImage1);
-
     try {
       const res = await fetch('/api/media', {
         method: 'POST',
@@ -70,7 +68,6 @@ const Demo = ({ classes }) => {
           // userName,
         }),
       });
-      console.log(res);
       Router.push('/');
     } catch (err) {
       console.log(err);

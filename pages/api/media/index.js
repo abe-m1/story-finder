@@ -29,13 +29,11 @@ export default async function handler(req, res) {
       }
       break;
     case 'POST':
-      console.log('in api', req.body);
       try {
         const publicID = `story-${Math.random().toString(24).slice(-8)}`;
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
 
         if (saveToCloud) {
-          console.log('reeq body', req.body);
           const newData = req.body.onboardStep
             ? {
                 name: req.body.userName,
@@ -63,7 +61,7 @@ export default async function handler(req, res) {
                   },
                 },
               };
-          console.log(newData);
+
           const user = await User.findByIdAndUpdate(req.body.userId, newData, {
             // new: true,
             // runValidators: true,

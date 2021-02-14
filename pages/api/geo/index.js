@@ -34,7 +34,6 @@ export default async function handler(req, res) {
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
 
         if (saveToCloud) {
-          // console.log('reeq body', req.body);
           const newData = {
             $push: {
               connections: {
@@ -54,7 +53,6 @@ export default async function handler(req, res) {
               },
             },
           };
-          console.log(newData);
           const user = await User.findByIdAndUpdate(req.body.userId, newData, {
             // new: true,
             // runValidators: true,

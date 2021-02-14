@@ -74,7 +74,7 @@ const Demo = ({
         croppedAreaPixels,
         rotation
       );
-      console.log('donee', { croppedImage });
+
       setCroppedImage(croppedImage);
       setCroppedImage1(croppedImage);
     } catch (e) {
@@ -87,8 +87,6 @@ const Demo = ({
   }, []);
 
   const onSelect = async () => {
-    console.log(croppedImage1);
-
     try {
       const res = await fetch('/api/media', {
         method: 'POST',
@@ -105,20 +103,15 @@ const Demo = ({
           // userName,
         }),
       });
-      console.log(res);
       Router.push('/');
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const onFileChange = async (e) => {
     // TODO move
-    // console.log(form, formError);
     // let allClear = true;
     // for (let prop in form) {
     //   if (form[prop] === undefined) {
-    //     console.log('here');
     //     allClear = false;
     //     setFormError({
     //       ...formError,
@@ -126,7 +119,7 @@ const Demo = ({
     //     });
     //   }
     // }
-    // console.log(formError);
+
     // if (!allClear) {
     //   return;
     // }
@@ -175,7 +168,6 @@ const Demo = ({
   //new
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
-    console.log('userId', userId);
     try {
       const croppedImage = await getCroppedImg(
         imageSrc,
@@ -192,10 +184,8 @@ const Demo = ({
 
       let results = {};
       if (geoResult) {
-        console.log('goe', geoResult);
         results = geoResult.results[0].geometry;
       }
-      console.log('goe1', results);
 
       const res = await fetch(`/api/geo/${userId}`, {
         method: 'PATCH',
@@ -213,19 +203,16 @@ const Demo = ({
 
       // Throw error with status code in case Fetch API req failed
       if (!res.ok) {
-        console.log(res);
         throw new Error(res.status);
       }
 
       const { data } = await res.json();
-      console.log('new data', data);
       onSuccessSubmit();
 
       mutate(`/api/uer/${userId}`, data, false); // Update the local data without a revalidation
       setScreen(screen + 1);
       // router.push('/');
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update pet');
     }
   };
@@ -233,7 +220,6 @@ const Demo = ({
   const handleChange = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(target);
     setForm({
       ...form,
       [name]: target.value,
@@ -272,7 +258,6 @@ const Demo = ({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        console.log(position);
         return position;
       },
       () => {
@@ -292,7 +277,6 @@ const Demo = ({
   };
 
   // const processForm = () => {
-  //   console.log(form);
   //   setLoading(true);
   //   //
   // };

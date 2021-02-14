@@ -66,7 +66,6 @@ const NewConnectionForm = ({
       onSuccessSubmit();
       // router.push('/');
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update pet');
     }
   };
@@ -82,21 +81,16 @@ const NewConnectionForm = ({
     });
 
     if (geoResult) {
-      console.log(geoResult);
       setCoords(geoResult.results[0].geometry);
     }
     // .then((data) => {
-    //   // console.log(JSON.stringify(data));
-    //   console.log(data.results[0].geometry);
     //   setCoords(data.results[0].geometry);
     // })
     // .catch((error) => {
     //   console.log('error', error.message);
     // });
     //
-    console.log('this is form', form, userId, coords, locationName);
     try {
-      console.log();
       const res = await fetch('/api/geo', {
         method: 'POST',
         headers: {
@@ -119,7 +113,6 @@ const NewConnectionForm = ({
 
       onSuccessSubmit();
     } catch (error) {
-      console.log(error);
       setMessage('Failed to add pet');
     }
   };
@@ -142,7 +135,6 @@ const NewConnectionForm = ({
 
   const handleSubmit1 = (e) => {
     e.preventDefault();
-    console.log('handling submit');
     opencage
       .geocode({
         q: locationName,
@@ -151,8 +143,6 @@ const NewConnectionForm = ({
         limit: 1,
       })
       .then((data) => {
-        // console.log(JSON.stringify(data));
-        console.log(data.results[0].geometry);
         setCoords(data.results[0].geometry);
       })
       .catch((error) => {

@@ -26,7 +26,6 @@
 
 //   /* The PUT method edits an existing entry in the mongodb database. */
 //   const putData = async (form) => {
-//     console.log('userId', userId);
 //     try {
 //       const res = await fetch(`/api/user/${userId}`, {
 //         method: 'PATCH',
@@ -39,7 +38,6 @@
 
 //       // Throw error with status code in case Fetch API req failed
 //       if (!res.ok) {
-//         console.log(res);
 //         throw new Error(res.status);
 //       }
 
@@ -49,7 +47,6 @@
 //       // router.push('/');
 //       advanceScreen();
 //     } catch (error) {
-//       console.log(error);
 //       setMessage('Failed to update pet');
 //     }
 //   };
@@ -109,7 +106,6 @@
 //           lat: position.coords.latitude,
 //           lng: position.coords.longitude,
 //         });
-//         console.log(position);
 //         return position;
 //       },
 //       () => {
@@ -294,7 +290,6 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
         croppedAreaPixels,
         rotation
       );
-      console.log('donee', { croppedImage });
       setCroppedImage(croppedImage);
       setCroppedImage1(croppedImage);
     } catch (e) {
@@ -311,8 +306,6 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
   };
 
   const onSelect = async () => {
-    console.log(croppedImage1);
-
     try {
       const res = await fetch('/api/media', {
         method: 'POST',
@@ -329,7 +322,6 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
           // userName,
         }),
       });
-      console.log(res);
       Router.push('/');
     } catch (err) {
       console.log(err);
@@ -355,7 +347,6 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
   //new
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
-    console.log('userId', userId);
     try {
       const croppedImage = await getCroppedImg(
         imageSrc,
@@ -391,12 +382,10 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
 
       // Throw error with status code in case Fetch API req failed
       if (!res.ok) {
-        console.log(res);
         throw new Error(res.status);
       }
 
       const { data } = await res.json();
-      console.log('new data', data);
 
       mutate(`/api/uer/${userId}`, data, false); // Update the local data without a revalidation
       setScreen(screen + 1);
@@ -440,7 +429,6 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        console.log(position);
         return position;
       },
       () => {
@@ -460,7 +448,6 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
   };
 
   // const processForm = () => {
-  //   console.log(form);
   //   setLoading(true);
   //   //
   // };

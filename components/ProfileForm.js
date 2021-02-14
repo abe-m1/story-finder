@@ -26,7 +26,6 @@ const ProfileForm = ({
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
-    console.log('userId', userId);
     try {
       const res = await fetch(`/api/user/${userId}`, {
         method: 'PATCH',
@@ -39,7 +38,6 @@ const ProfileForm = ({
 
       // Throw error with status code in case Fetch API req failed
       if (!res.ok) {
-        console.log(res);
         throw new Error(res.status);
       }
 
@@ -111,7 +109,6 @@ const ProfileForm = ({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        console.log(position);
         return position;
       },
       () => {

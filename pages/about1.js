@@ -42,15 +42,10 @@ const About = () => {
 
   const [tree, setTree] = useState({});
   useEffect(() => {
-    console.log('this is tree before', data1);
     setTree(Object.assign({}, data1));
   }, []);
-  function hand(e, k, r) {
-    console.log('clicked', e, k, r);
-  }
 
   function add(n) {
-    console.log('this is tree', n);
     let newTree = tree;
     newTree.children.push({
       name: 'Child Three',
@@ -59,7 +54,6 @@ const About = () => {
     setTree(Object.assign({}, newTree));
   }
   function addParent() {
-    console.log('this is tree', tree);
     let newTree = {
       name: 'grandparent',
       id: 3453453344443,
@@ -70,7 +64,6 @@ const About = () => {
 
   function traverseDF(neededId) {
     let position = [];
-    console.log(tree.children);
     if (tree.id === neededId) {
       console.log('found');
     }

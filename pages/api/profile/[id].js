@@ -36,14 +36,11 @@ export default async function handler(req, res) {
       break;
 
     case 'PATCH' /* Edit a model by its ID */:
-      console.log('IN PATCH');
       try {
         const publicID = `story-${Math.random().toString(24).slice(-8)}`;
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
 
         if (saveToCloud) {
-          console.log('reeq body', req.body);
-
           const newData = {
             name: req.body.name,
             image_url: saveToCloud.secure_url,
@@ -57,7 +54,7 @@ export default async function handler(req, res) {
               },
             },
           };
-          console.log(newData);
+
           const user = await User.findByIdAndUpdate(id, newData, {
             new: true,
             runValidators: true,

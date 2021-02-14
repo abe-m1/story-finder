@@ -9,7 +9,6 @@ const Home = () => {
   const [addConnection, setAddConnection] = useState(false);
 
   const onSuccessSubmit = () => {
-    console.log('on success fired');
     setAddConnection(false);
   };
 

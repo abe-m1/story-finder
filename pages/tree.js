@@ -50,7 +50,6 @@ const FamilyTree = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [selectedNode, setSelectedNode] = React.useState('');
   function openModal(e, n) {
-    console.log('in here', n);
     setIsOpen(true);
     setSelectedNode(n);
   }
@@ -64,10 +63,6 @@ const FamilyTree = () => {
     setIsOpen(false);
   }
 
-  function hand(e, k, r) {
-    console.log('clicked', e, k, r);
-    setIsOpen(true);
-  }
   return (
     <Layout>
       <Tree
