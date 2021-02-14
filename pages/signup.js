@@ -65,7 +65,7 @@ const Signup = () => {
         }
         .page {
           padding: 3rem;
-          background-image: url('./bg-pattern4.jpg');
+          background-image: url('./bg-pattern4a.jpg');
           height: 100%;
         }
       `}</style>

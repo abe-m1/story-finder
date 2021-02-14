@@ -44,6 +44,7 @@ export default async function handler(req, res) {
           const newData = {
             name: req.body.name,
             image_url: saveToCloud.secure_url,
+
             $push: {
               markers: {
                 position: req.body.position,

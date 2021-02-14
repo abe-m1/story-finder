@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Layout from '../components/layout';
 import ConnectionDialog from '../components/connectionDialog';
+import Form from '../components/OnboardForm';
 
 const Home = () => {
   const user = useUser();
@@ -36,7 +37,7 @@ const Home = () => {
           </div>
         )}
 
-        {user && (
+        {user && user.onboardingComplete && (
           <div>
             Add Connections
             <button onClick={() => setAddConnection(true)}>Add</button>
@@ -49,6 +50,11 @@ const Home = () => {
               addConnection={addConnection}
               onClose={onClose}
             />
+          </div>
+        )}
+        {user && !user.onboardingComplete && (
+          <div className="back">
+            <Form formId="add-user-form" userId={user._id} userForm={{}} />
           </div>
         )}
 

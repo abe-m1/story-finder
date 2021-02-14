@@ -5,7 +5,8 @@ import Layout from '../components/layout';
 import Form from '../components/form';
 
 const Login = () => {
-  let user = useUser({ redirectTo: '/onboard', redirectIfFound: true });
+  // let user = useUser({ redirectTo: '/onboard', redirectIfFound: true });
+  let user = useUser({ redirectTo: '/', redirectIfFound: true });
 
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -58,8 +59,8 @@ const Login = () => {
           }
           .page {
             padding: 3rem;
-            background-image: url('./bg-pattern3.jpg');
-            background-size: cover;
+            background-image: url('./bg-pattern4b.jpg');
+            // background-size: cover;
             height: 100%;
           }
         `}</style>

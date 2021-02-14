@@ -437,6 +437,35 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
     );
   };
 
+  const finishOnboard = async () => {
+    try {
+      const res = await fetch(`/api/user/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          Accept: contentType,
+          'Content-Type': contentType,
+        },
+        body: JSON.stringify({
+          onboardingComplete: true,
+        }),
+      });
+
+      // Throw error with status code in case Fetch API req failed
+      if (!res.ok) {
+        throw new Error(res.status);
+      }
+
+      const { data } = await res.json();
+
+      mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
+
+      router.push('/challenges');
+    } catch (error) {
+      console.log(error);
+      setMessage('Failed to update pet');
+    }
+  };
+
   //   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
@@ -564,9 +593,7 @@ const Demo = ({ classes, formId, userForm, userId, forNewUser = false }) => {
           <div>
             Add Connections
             <button onClick={() => setAddConnection(true)}>Add</button>
-            <Link href="/">
-              <button>Add Later</button>
-            </Link>
+            <button onClick={finishOnboard}>Start first assignment</button>
             <ImgDialog
               img={croppedImage}
               userId={userId}
