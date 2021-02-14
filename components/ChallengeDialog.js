@@ -52,7 +52,7 @@ class ImgDialog extends React.Component {
   };
 
   render() {
-    const { classes, userId, user } = this.props;
+    const { classes, userId, user, challenge } = this.props;
     return (
       <Dialog
         // fullScreen
@@ -82,6 +82,7 @@ class ImgDialog extends React.Component {
           <img src={this.props.img} alt="Cropped" className={classes.img} />
         </div> */}
         <ChallengeForm
+          challenge={challenge}
           user={user}
           formId="new-connection-form"
           userId={userId}

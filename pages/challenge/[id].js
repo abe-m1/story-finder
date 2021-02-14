@@ -22,9 +22,13 @@ const Post = () => {
   });
   const { id } = router.query;
 
-  const onSuccessSubmit = () => {};
+  const onSuccessSubmit = () => {
+    setAddConnection(false);
+  };
 
-  const onClose = useCallback(() => {}, []);
+  const onClose = useCallback(() => {
+    setAddConnection(false);
+  }, []);
 
   if (!user || user.isLoggedIn === false) {
     return <Layout>Loading...</Layout>;
@@ -36,6 +40,7 @@ const Post = () => {
       <p>{currentChallenge.challengeName}</p>
       <button onClick={() => setAddConnection(true)}>Complete Challenge</button>
       <ChallengeDialog
+        challenge={currentChallenge}
         user={user}
         userId={user._id}
         onSuccessSubmit={onSuccessSubmit}

@@ -10,8 +10,18 @@ const markerSchema = new mongoose.Schema({
 });
 
 const challengesSchema = new mongoose.Schema({
-  challengeNumber: { type: Number },
+  challengeNumber: { type: String },
   type: { type: String },
+  position: { type: Object },
+  challengeImage: { type: String },
+  challengeType: { type: String },
+  challengeType: { type: String },
+  challengeId: { type: String },
+  challengeName: { type: String },
+  challengeDescription: { type: String },
+  responseDescription: { type: String },
+  connectionId: { type: String },
+  challengeResponse: { type: String },
 });
 
 const connectionSchema = new mongoose.Schema({

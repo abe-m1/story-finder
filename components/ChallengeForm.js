@@ -31,6 +31,7 @@ const Demo = ({
   forNewUser = false,
   onSuccessSubmit,
   user,
+  challenge,
 }) => {
   console.log('form user', user);
   const contentType = 'application/json';
@@ -42,9 +43,10 @@ const Demo = ({
   //   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   const [form, setForm] = useState({
-    name: userForm.name,
+    description: userForm.name,
     location: userForm.location,
     connection: userForm.connection,
+    challengeResponse: userForm.challengeResponse,
   });
 
   const [formError, setFormError] = useState({
@@ -170,13 +172,17 @@ const Demo = ({
   //new
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
+    console.log('in put data');
     try {
-      const croppedImage = await getCroppedImg(
-        imageSrc,
-        croppedAreaPixels,
-        rotation
-      );
-
+      let croppedImage;
+      if (imageSrc) {
+        croppedImage = await getCroppedImg(
+          imageSrc,
+          croppedAreaPixels,
+          rotation
+        );
+      }
+      console.log('IN PATCH');
       const geoResult = await opencage.geocode({
         q: form.location,
         key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
@@ -189,7 +195,7 @@ const Demo = ({
         results = geoResult.results[0].geometry;
       }
 
-      const res = await fetch(`/api/geo/${userId}`, {
+      const res = await fetch(`/api/challenge/${userId}`, {
         method: 'PATCH',
         headers: {
           Accept: contentType,
@@ -199,7 +205,10 @@ const Demo = ({
           ...form,
           imagePreviewUrl: croppedImage,
           position: results,
-          userId,
+          challengeId: challenge.id,
+          challengeName: challenge.challengeName,
+          challengeDescription: challenge.challengeDescription,
+          challengeType: challenge.type,
         }),
       });
 
@@ -238,6 +247,7 @@ const Demo = ({
   // };
 
   const processForm = () => {
+    console.log('process firing');
     setLoading(true);
 
     const errs = formValidate();
@@ -271,7 +281,7 @@ const Demo = ({
   //   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
-    if (!form.name) err.name = 'Name is required';
+    // if (!form.name) err.name = 'Name is required';
     // if (!form.owner_name) err.owner_name = 'Owner is required';
     // if (!form.species) err.species = 'Species is required';
     // if (!form.image_url) err.image_url = 'Image URL is required';
@@ -394,14 +404,14 @@ const Demo = ({
                 <input
                   type="text"
                   maxLength="20"
-                  name="name"
+                  name="description"
                   onChange={handleChange}
                   required
                   value={form.name}
                   placeholder="Add your name"
                 />
                 <label className="control-label" for="input">
-                  What is your connection's name?
+                  Describe what you are submitting?
                 </label>
                 <i className="bar"></i>
                 {formError.name && (
@@ -506,9 +516,35 @@ const Demo = ({
               </label>
             </div> */}
             </form>
-
-            <h3>Upload your profile picture</h3>
-            <input type="file" onChange={onFileChange} accept="image/*" />
+            {challenge.type === 'image-submit' && (
+              <div>
+                <h3>Upload your profile picture</h3>
+                <input type="file" onChange={onFileChange} accept="image/*" />
+              </div>
+            )}
+            {challenge.type === 'text-submit' && (
+              <div>
+                <h3>Upload text</h3>
+                <textarea
+                  name="challengeResponse"
+                  onChange={handleChange}
+                  required
+                  value={form.challengeResponse}
+                  placeholder="Add your response"
+                  rows="10"
+                  cols="50"
+                  type="text"
+                />
+                <Button
+                  onClick={() => processForm()}
+                  variant="contained"
+                  color="primary"
+                  classes={{ root: classes.cropButton }}
+                >
+                  Submit Challenge
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>
