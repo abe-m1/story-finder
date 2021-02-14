@@ -1,16 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/layout';
-import Form from '../components/form';
-// import d3 from 'd3';
-import React from 'react';
-// import Tree from 'react-d3-tree';
-import dynamic from 'next/dynamic';
 import Tree from 'react-tree-graph';
 import Modal from 'react-modal';
 import 'react-tree-graph/dist/style.css';
-// import handler from './api/pets/[id]';
+
 const customStyles = {
   content: {
     top: '50%',

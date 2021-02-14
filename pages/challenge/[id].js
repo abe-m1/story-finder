@@ -13,7 +13,6 @@ const Post = () => {
   const [addConnection, setAddConnection] = useState(false);
 
   useEffect(() => {
-    console.log(router.query);
     let challenge = challenges.find(
       (item) => item.id === parseInt(router.query.id)
     );
