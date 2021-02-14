@@ -510,9 +510,9 @@ const Demo = ({
           </div>
           <div className={`col ${screen === 3 ? 'current' : ''}`}>
             <span className="step-number">3</span>
-            {/* <div className="step-title">
-                    <span>And the very last one!</span> 
-                  </div> */}
+            <div className="step-title">
+              {/* <span>And the very last one!</span>  */}
+            </div>
           </div>
           <div className={`col ${screen === 4 ? 'current' : ''}`}>
             <span className="step-number">4</span>
@@ -596,7 +596,7 @@ const Demo = ({
         )}
         {screen === 1 && (
           <div>
-            hello
+            <p>To get started please fill in some information about yourself</p>
             <button onClick={() => setScreen(2)}>next</button>
           </div>
         )}
@@ -627,14 +627,6 @@ const Demo = ({
             <form>
               <h1>Tell us about yourself</h1>
               <div className="form-group">
-                {/* <input
-             type="text"
-             maxLength="20"
-             name="name"
-             value={form.name}
-             onChange={handleChange}
-             required
-           /> */}
                 <input
                   type="text"
                   maxLength="20"
@@ -648,7 +640,7 @@ const Demo = ({
                   Your Name
                 </label>
                 <i className="bar"></i>
-                <i className="input-error">error here</i>
+                {/* <i className="input-error">error here</i> */}
               </div>
               <div className="form-group">
                 <input
@@ -663,9 +655,9 @@ const Demo = ({
                   What city do you live in?
                 </label>
                 <i className="bar"></i>
-                <i className="input-error">error here</i>
+                {/* <i className="input-error">error here</i> */}
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <select>
                   <option>please select...</option>
                   <option>Mother</option>
@@ -682,7 +674,7 @@ const Demo = ({
                   How are they connected to you
                 </label>
                 <i className="bar"></i>
-              </div>
+              </div> */}
 
               {/* <div className="form-group">
                   <input
