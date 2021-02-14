@@ -45,6 +45,12 @@ const Demo = ({
     connection: userForm.connection,
   });
 
+  const [formError, setFormError] = useState({
+    name: false,
+    location: false,
+    connection: false,
+  });
+
   const [imageSrc, setImageSrc] = React.useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -107,6 +113,50 @@ const Demo = ({
   };
 
   const onFileChange = async (e) => {
+    // TODO move
+    // console.log(form, formError);
+    // let allClear = true;
+    // for (let prop in form) {
+    //   if (form[prop] === undefined) {
+    //     console.log('here');
+    //     allClear = false;
+    //     setFormError({
+    //       ...formError,
+    //       [prop]: true,
+    //     });
+    //   }
+    // }
+    // console.log(formError);
+    // if (!allClear) {
+    //   return;
+    // }
+    // let foundError = false;
+    // if (!form.name) {
+    //   setFormError({
+    //     ...formError,
+    //     name: true,
+    //   });
+    //   foundError = true;
+    // }
+    // if (!form.location) {
+    //   setFormError({
+    //     ...formError,
+    //     location: true,
+    //   });
+    //   foundError = true;
+    // }
+    // // if (!form.connection) {
+    // //   setFormError({
+    // //     ...formError,
+    // //     connection: true,
+    // //   });
+    // //   foundError = true;
+    // // }
+
+    // if (foundError) {
+    //   return;
+    // }
+
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
@@ -368,7 +418,9 @@ const Demo = ({
                   What is your connection's name?
                 </label>
                 <i className="bar"></i>
-                <i className="input-error">error here</i>
+                {formError.name && (
+                  <i className="input-error">Please fill out name</i>
+                )}
               </div>
               <div className="form-group">
                 <input
@@ -383,7 +435,9 @@ const Demo = ({
                   What city do they live in?
                 </label>
                 <i className="bar"></i>
-                <i className="input-error">error here</i>
+                {formError.location && (
+                  <i className="input-error">Please fill out location</i>
+                )}
               </div>
               <div className="form-group">
                 <select
@@ -406,6 +460,9 @@ const Demo = ({
                   How are they connected to you
                 </label>
                 <i className="bar"></i>
+                {formError.connection && (
+                  <i className="input-error">Please fill out name</i>
+                )}
               </div>
 
               {/* <div className="form-group">
