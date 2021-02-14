@@ -606,6 +606,22 @@ const Demo = ({
             <button onClick={() => setAddConnection(true)}>Add</button>
             <button onClick={finishOnboard}>Start first assignment</button>
             {connections.length}
+            <ul>
+              {connections.length > 0 &&
+                connections.map((connection) => (
+                  <li key={connection._id} className="user">
+                    <img
+                      className="user__circle"
+                      src={connection.connectionImage}
+                      alt=""
+                    />
+                    <div>
+                      <p className="user__name">{connection.name}</p>
+                      <p className="user__type">Relative</p>
+                    </div>
+                  </li>
+                ))}
+            </ul>
             {/* <ImgDialog
               img={croppedImage}
               userId={userId}
@@ -1257,6 +1273,38 @@ const Demo = ({
         }
         .stepper.stepper--horizontal .col.current .step-title {
           color: #000;
+        }
+
+        .user {
+          display: flex;
+          margin-bottom: 1rem;
+        }
+        .user img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 2rem;
+        }
+        .user__name {
+          font-weight: 700;
+          // color: #ecf2f8;
+        }
+        .user__name-dark {
+          font-weight: 700;
+          // color: #48556a;
+        }
+        .user__type {
+          // color: #ecf2f8;
+          opacity: 50%;
+          margin-top: 8px;
+          margin-bottom: 5px;
+        }
+        .user__type-dark {
+          // color: #48556a;
+          opacity: 50%;
+        }
+        .user__circle {
+          border: 2px solid #9681b6;
         }
       `}</style>
     </>

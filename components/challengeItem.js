@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
   return (
     <li className="item-container">
@@ -7,6 +9,9 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
       <div className="company-info">
         <div className="top-line">
           <span className="company">{challenge.challengeName}</span>{' '}
+          <Link href={`/challenge/${challenge.id}`}>
+            <span className="new">View Challenge</span>
+          </Link>
           <span className="new">Test!</span>{' '}
           <span className="featured">Places</span>
           <p className="position">{challenge.challengeName}</p>
