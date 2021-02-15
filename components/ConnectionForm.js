@@ -129,7 +129,7 @@ const Demo = ({
       onSuccessSubmit(data);
       setScreen(screen + 1);
     } catch (error) {
-      setMessage('Failed to update pet');
+      setMessage('Failed to update user');
     }
   };
 

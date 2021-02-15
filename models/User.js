@@ -33,18 +33,13 @@ const connectionSchema = new mongoose.Schema({
 
 const UserSchema = new mongoose.Schema({
   username: {
-    /* The name of this pet */
-
     type: String,
-    required: [true, 'Please provide a name for this pet.'],
+    required: [true, 'Please provide a name for this user.'],
     maxlength: [20, 'Name cannot be more than 60 characters'],
   },
   password: {
-    /* The owner of this pet */
-
     type: String,
-    required: [true, "Please provide the pet owner's name"],
-    // maxlength: [20, "Owner's Name cannot be more than 60 characters"],
+    required: [true, 'Please provide a password'],
   },
   salt: {
     type: String,

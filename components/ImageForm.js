@@ -40,7 +40,7 @@ const ImageForm = ({
       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
       // router.push('/');
     } catch (error) {
-      setMessage('Failed to update pet');
+      setMessage('Failed to update user');
     }
   };
 
@@ -77,20 +77,8 @@ const ImageForm = ({
       }
       // router.push('/onboard');
     } catch (error) {
-      setMessage('Failed to add pet');
+      setMessage('Failed to add user');
     }
-  };
-
-  const handleChange = (e) => {
-    const target = e.target;
-    const value =
-      target.name === 'poddy_trained' ? target.checked : target.value;
-    const name = target.name;
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
   };
 
   const handleSubmit = (e) => {
@@ -116,12 +104,9 @@ const ImageForm = ({
     reader.readAsDataURL(file);
   };
 
-  /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
     // if (!form.imagePreviewUrl) err.name = 'Name is required';
-    // if (!form.owner_name) err.owner_name = 'Owner is required';
-    // if (!form.species) err.species = 'Species is required';
     // if (!form.image_url) err.image_url = 'Image URL is required';
     return err;
   };
