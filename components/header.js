@@ -16,7 +16,7 @@ const Header = () => {
         <ul style={{ margin: '7px' }}>
           <li className="logo">
             <Link href="/">
-              <img src="./logo.png" />
+              <img src="/logo.png" />
             </Link>
           </li>
           {user ? (

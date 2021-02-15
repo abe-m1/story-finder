@@ -6,38 +6,42 @@ import Tree from 'react-tree-graph';
 import Modal from 'react-modal';
 import 'react-tree-graph/dist/style.css';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
 const FamilyTree = () => {
+  const user = useUser({ redirectTo: '/login' });
   let data = {
-    name: 'Parent',
-    id: 4545454,
-
-    nodeProps: {
-      href: 'Logo1.png',
-    },
+    name: 'Grandpa = Grandma',
+    id: 8989,
     children: [
       {
-        name: 'Child One5',
-        id: 1546564,
-        gProps: {
-          className: 'red-node',
-          onClick: (e, n) => openModal(e, n),
-          // onClick: (event, node) => alert(`Clicked ${node}!`),
+        name: 'Uncle',
+        id: 4545454,
+
+        nodeProps: {
+          href: 'Logo1.png',
         },
       },
       {
-        name: 'Child Two',
-        id: 34534545,
+        name: 'Mom = Dad',
+        id: 4545454,
+
+        nodeProps: {
+          href: 'Logo1.png',
+        },
+        children: [
+          {
+            name: 'Brother',
+            id: 1546564,
+          },
+          {
+            name: 'Me',
+            id: 34534545,
+            gProps: {
+              className: 'red-node',
+              onClick: (e, n) => openModal(e, n),
+              // onClick: (event, node) => alert(`Clicked ${node}!`),
+            },
+          },
+        ],
       },
     ],
   };
@@ -49,40 +53,42 @@ const FamilyTree = () => {
     setSelectedNode(n);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   return (
     <Layout>
-      <Tree
-        data={data}
-        height={400}
-        width={400}
-        keyProp="id"
-        // gProps={{
-        //   className: 'node',
-        //   onClick: hand,
-        // }}
-      />
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2>Modal</h2>
-        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-        <button onClick={closeModal}>close</button>
-        <div>I am selected Node {selectedNode}</div>
-        <button>add Node</button>
-      </Modal>
+      <div className="flex-container">
+        <div>
+          <Tree
+            data={data}
+            height={700}
+            width={800}
+            keyProp="id"
+            textProps={{ x: 10, fill: '#3f51b5', fontSize: '30px' }}
+            // gProps={{
+            //   className: 'node',
+            //   onClick: hand,
+            // }}
+          />
+        </div>
+        <aside className="sidebar">
+          <h1>Connections</h1>
+          <ul>
+            {user.connections.length > 0 &&
+              user.connections.map((connection) => (
+                <li key={connection._id} className="user">
+                  <img
+                    className="user__circle"
+                    src={connection.connectionImage}
+                    alt=""
+                  />
+                  <div>
+                    <p className="user__name">{connection.name}</p>
+                    <p className="user__type">Relative</p>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </aside>
+      </div>
       <style jsx>{`
         .linage {
           fill: none;
@@ -118,6 +124,46 @@ const FamilyTree = () => {
         svg {
           border-style: solid;
           border-width: 1px;
+        }
+
+        .flex-container {
+          display: flex;
+        }
+
+        .user {
+          display: flex;
+          margin-bottom: 1rem;
+        }
+        .user img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 2rem;
+        }
+        .user__name {
+          font-weight: 700;
+          // color: #ecf2f8;
+        }
+        .user__name-dark {
+          font-weight: 700;
+          // color: #48556a;
+        }
+        .user__type {
+          // color: #ecf2f8;
+          opacity: 50%;
+          margin-top: 8px;
+          margin-bottom: 5px;
+        }
+        .user__type-dark {
+          // color: #48556a;
+          opacity: 50%;
+        }
+        .user__circle {
+          border: 2px solid #9681b6;
+        }
+        .sidebar {
+          border-left: 1px solid #ebebeb;
+          padding: 2rem;
         }
       `}</style>
     </Layout>
