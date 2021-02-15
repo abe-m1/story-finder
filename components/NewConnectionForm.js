@@ -84,13 +84,7 @@ const NewConnectionForm = ({
     if (geoResult) {
       setCoords(geoResult.results[0].geometry);
     }
-    // .then((data) => {
-    //   setCoords(data.results[0].geometry);
-    // })
-    // .catch((error) => {
-    //   console.log('error', error.message);
-    // });
-    //
+
     try {
       const res = await fetch('/api/geo', {
         method: 'POST',

@@ -120,7 +120,7 @@ const ProfileForm = ({
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
-    if (!form.name) err.name = 'Name is required';
+    // if (!form.name) err.name = 'Name is required';
     // if (!form.owner_name) err.owner_name = 'Owner is required';
     // if (!form.species) err.species = 'Species is required';
     // if (!form.image_url) err.image_url = 'Image URL is required';

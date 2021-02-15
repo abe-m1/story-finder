@@ -6,9 +6,9 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
       <div>
         <img className="img" alt="challenge picture" />
       </div>
-      <div className="company-info">
+      <div className="challenge-info">
         <div className="top-line">
-          <span className="company">{challenge.challengeName}</span>{' '}
+          <span className="challenge-number">Challenge #{challenge.id}</span>{' '}
           <Link href={`/challenge/${challenge.id}`}>
             <span className="new">View Challenge</span>
           </Link>
@@ -48,7 +48,7 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
           margin-bottom: 0.6rem;
         }
 
-        .company {
+        .challenge-number {
           font-weight: 700;
           color: hsl(180, 29%, 50%);
           margin-right: 0.6rem;
@@ -111,7 +111,7 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
             margin-top: 0;
             width: 90px;
           }
-          .company-info {
+          .challenge-info {
             margin-right: auto;
             margin-left: 4rem;
           }
@@ -119,7 +119,7 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
           .top-line {
             margin-bottom: 0.5rem;
           }
-          .company {
+          .challenge-number {
             margin-bottom: 0.5rem;
           }
           .seperator {

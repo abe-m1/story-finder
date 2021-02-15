@@ -36,15 +36,6 @@ const Header = () => {
                   <a>Challenges</a>
                 </Link>
               </li>
-
-              {/* <li>{user.name}</li> */}
-              {/* <li>
-                <img
-                  src={user.image_url || './default-profile.png'}
-                  alt="user image"
-                  className="profile-pic"
-                />
-              </li> */}
               <div className="menu-container">
                 <button onClick={onClick} className="menu-trigger">
                   <span>{user.name}</span>
@@ -64,9 +55,6 @@ const Header = () => {
                         <a href="#">Collection</a>
                       </Link>
                     </li>
-                    {/* <li>
-                      <a href="#">Trips</a>
-                    </li> */}
                     <li>
                       <a href="/api/logout">Logout</a>
                     </li>

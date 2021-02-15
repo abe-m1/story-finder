@@ -7,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import Button from '@material-ui/core/Button';
 import ConnectionForm from '../components/ConnectionForm';
 
 const styles = {
@@ -35,7 +34,7 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class ImgDialog extends React.Component {
+class ConnectionDialog extends React.Component {
   state = {
     open: false,
   };
@@ -55,7 +54,6 @@ class ImgDialog extends React.Component {
     const { classes, userId } = this.props;
     return (
       <Dialog
-        // fullScreen
         open={this.props.addConnection}
         onClose={this.props.onClose}
         TransitionComponent={Transition}
@@ -78,9 +76,6 @@ class ImgDialog extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        {/* <div className={classes.imgContainer}>
-          <img src={this.props.img} alt="Cropped" className={classes.img} />
-        </div> */}
         <ConnectionForm
           formId="new-connection-form"
           userId={userId}
@@ -88,10 +83,9 @@ class ImgDialog extends React.Component {
           onboardStep={4}
           userForm={{ imagePreviewUrl: '' }}
         />
-        {/* <Button onClick={this.props.onSelect}>Choose</Button> */}
       </Dialog>
     );
   }
 }
 
-export default withStyles(styles)(ImgDialog);
+export default withStyles(styles)(ConnectionDialog);

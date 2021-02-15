@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import ReactDOM from 'react-dom';
 import Cropper from 'react-easy-crop';
 import Slider from '@material-ui/lab/Slider';
 import Button from '@material-ui/core/Button';
@@ -10,12 +9,9 @@ import { getOrientation } from 'get-orientation/browser';
 import ImgDialog from '../components/ImgDialog';
 import { getCroppedImg, getRotatedImage } from '../components/canvasUtils';
 import { styles } from '../components/styles';
-import Layout from '../components/layout';
-import Router from 'next/router';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr';
 import { useUser } from '../lib/hooks';
-import Link from 'next/link';
 
 const ORIENTATION_TO_ANGLE = {
   3: 180,
@@ -37,7 +33,6 @@ const Demo = ({
 
   const [message, setMessage] = useState('');
   const [position, setPosition] = useState({});
-  //   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   const [form, setForm] = useState({
     name: userForm.name,
@@ -67,89 +62,11 @@ const Demo = ({
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const showCroppedImage = useCallback(async () => {
-    try {
-      const croppedImage = await getCroppedImg(
-        imageSrc,
-        croppedAreaPixels,
-        rotation
-      );
-
-      setCroppedImage(croppedImage);
-      setCroppedImage1(croppedImage);
-    } catch (e) {
-      console.error(e);
-    }
-  }, [imageSrc, croppedAreaPixels, rotation]);
-
   const onClose = useCallback(() => {
     setAddConnection(false);
   }, []);
 
-  const onSelect = async () => {
-    try {
-      const res = await fetch('/api/media', {
-        method: 'POST',
-        headers: {
-          Accept: contentType,
-          'Content-Type': contentType,
-        },
-        body: JSON.stringify({
-          ...form,
-          imagePreviewUrl: croppedImage1,
-          userId,
-          // onboardStep,
-          // position,
-          // userName,
-        }),
-      });
-      Router.push('/');
-    } catch (err) {}
-  };
-
   const onFileChange = async (e) => {
-    // TODO move
-    // let allClear = true;
-    // for (let prop in form) {
-    //   if (form[prop] === undefined) {
-    //     allClear = false;
-    //     setFormError({
-    //       ...formError,
-    //       [prop]: true,
-    //     });
-    //   }
-    // }
-
-    // if (!allClear) {
-    //   return;
-    // }
-    // let foundError = false;
-    // if (!form.name) {
-    //   setFormError({
-    //     ...formError,
-    //     name: true,
-    //   });
-    //   foundError = true;
-    // }
-    // if (!form.location) {
-    //   setFormError({
-    //     ...formError,
-    //     location: true,
-    //   });
-    //   foundError = true;
-    // }
-    // // if (!form.connection) {
-    // //   setFormError({
-    // //     ...formError,
-    // //     connection: true,
-    // //   });
-    // //   foundError = true;
-    // // }
-
-    // if (foundError) {
-    //   return;
-    // }
-
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       let imageDataUrl = await readFile(file);
@@ -211,7 +128,6 @@ const Demo = ({
       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
       onSuccessSubmit(data);
       setScreen(screen + 1);
-      // router.push('/');
     } catch (error) {
       setMessage('Failed to update pet');
     }
@@ -226,15 +142,6 @@ const Demo = ({
     });
   };
 
-  // const handleDrop = (e) => {
-  //   const target = e.target;
-
-  //   setForm({
-  //     ...form,
-  //     connection: target.value,
-  //   });
-  // };
-
   const processForm = () => {
     setLoading(true);
 
@@ -246,45 +153,38 @@ const Demo = ({
     }
   };
 
-  const getLocation = () => {
-    const geolocation = navigator.geolocation;
+  // const getLocation = () => {
+  //   const geolocation = navigator.geolocation;
 
-    if (!geolocation) {
-      throw new Error('Not Supported');
-    }
-    geolocation.getCurrentPosition(
-      (position) => {
-        setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-        return position;
-      },
-      () => {
-        console.log('permission denied');
-      }
-    );
-  };
+  //   if (!geolocation) {
+  //     throw new Error('Not Supported');
+  //   }
+  //   geolocation.getCurrentPosition(
+  //     (position) => {
+  //       setPosition({
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude,
+  //       });
+  //       return position;
+  //     },
+  //     () => {
+  //       console.log('permission denied');
+  //     }
+  //   );
+  // };
 
-  //   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
-    if (!form.name) err.name = 'Name is required';
+    // if (!form.name) err.name = 'Name is required';
     // if (!form.owner_name) err.owner_name = 'Owner is required';
     // if (!form.species) err.species = 'Species is required';
     // if (!form.image_url) err.image_url = 'Image URL is required';
     return err;
   };
 
-  // const processForm = () => {
-  //   setLoading(true);
-  //   //
-  // };
-
   return (
     <>
       <div className="box-container">
-        {/* {imageSrc && ( */}
         {screen === 3 && (
           <React.Fragment>
             <div className={classes.cropContainer}>
@@ -335,16 +235,6 @@ const Demo = ({
                   onChange={(e, rotation) => setRotation(rotation)}
                 />
               </div>
-
-              {/* <Button
-                onClick={() => processForm()}
-                variant="contained"
-                color="primary"
-                classes={{ root: classes.cropButton }}
-              >
-                {!loading && 'Next'}
-                {loading && <CircularProgress color="secondary" />}
-              </Button> */}
             </div>
             <div>
               <Button
@@ -353,42 +243,17 @@ const Demo = ({
                 color="primary"
                 classes={{ root: classes.cropButton }}
               >
-                Add Connection
+                {!loading && 'Add Connection'}
+                {loading && <CircularProgress color="secondary" />}
               </Button>
             </div>
           </React.Fragment>
         )}
-
-        {/* {screen === 4 && (
-          <div>
-            Add Connections
-            <button onClick={() => setAddConnection(true)}>Add</button>
-            <Link href="/">
-              <button>Add Later</button>
-            </Link>
-            <ImgDialog
-              img={croppedImage}
-              userId={userId}
-              onSuccessSubmit={onSuccessSubmit}
-              addConnection={addConnection}
-              onClose={onClose}
-              onSelect={onSelect}
-            />
-          </div>
-        )} */}
         {screen === 1 && (
           <div>
             <form>
               <h1>Add a new connection</h1>
               <div className="form-group">
-                {/* <input
-             type="text"
-             maxLength="20"
-             name="name"
-             value={form.name}
-             onChange={handleChange}
-             required
-           /> */}
                 <input
                   type="text"
                   maxLength="20"
@@ -448,58 +313,6 @@ const Demo = ({
                   <i className="input-error">Please fill out name</i>
                 )}
               </div>
-
-              {/* <div className="form-group">
-                  <input
-                    type="text"
-                    required="required"
-                    placeholder="stuf stuf stuuuffff"
-                  />
-                  <label className="control-label" for="input">
-                    Surname
-                  </label>
-                  <i className="bar"></i>
-                  <i className="input-error">error here</i>
-                </div> */}
-              {/* <div className="form-group">
-                  <textarea required="required"></textarea>
-                  <label className="control-label" for="textarea">
-                    Textarea
-                  </label>
-                  <i className="bar"></i>
-                </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" checked="checked" />
-                <i className="helper"></i>I'm the label from a checkbox
-              </label>
-            </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" />
-                <i className="helper"></i>I'm thae label from a checkbox
-              </label>
-            </div> */}
-              {/* <div className="form-radio">
-              <div className="radio">
-                <label>
-                  <input type="radio" name="radio" checked="checked" />
-                  <i className="helper"></i>I'm the label from a radio button
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="radio" />
-                  <i className="helper"></i>I'm the label from a radio button
-                </label>
-              </div>
-            </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" />
-                <i className="helper"></i>I'm the label from a checkbox
-              </label>
-            </div> */}
             </form>
 
             <h3>Upload your profile picture</h3>

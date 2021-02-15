@@ -35,7 +35,7 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class ImgDialog extends React.Component {
+class ChallengeDialog extends React.Component {
   state = {
     open: false,
   };
@@ -55,7 +55,6 @@ class ImgDialog extends React.Component {
     const { classes, userId, user, challenge } = this.props;
     return (
       <Dialog
-        // fullScreen
         open={this.props.addConnection}
         onClose={this.props.onClose}
         TransitionComponent={Transition}
@@ -78,9 +77,6 @@ class ImgDialog extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        {/* <div className={classes.imgContainer}>
-          <img src={this.props.img} alt="Cropped" className={classes.img} />
-        </div> */}
         <ChallengeForm
           challenge={challenge}
           user={user}
@@ -90,10 +86,9 @@ class ImgDialog extends React.Component {
           onboardStep={4}
           userForm={{ imagePreviewUrl: '' }}
         />
-        {/* <Button onClick={this.props.onSelect}>Choose</Button> */}
       </Dialog>
     );
   }
 }
 
-export default withStyles(styles)(ImgDialog);
+export default withStyles(styles)(ChallengeDialog);

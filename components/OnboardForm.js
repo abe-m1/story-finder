@@ -1,232 +1,3 @@
-// import { useState } from 'react';
-// import { useRouter } from 'next/router';
-// import { mutate } from 'swr';
-// import { useUser } from '../lib/hooks';
-
-// const ProfileForm = ({
-//   formId,
-//   userForm,
-//   userId,
-//   forNewPet = false,
-//   advanceScreen,
-// }) => {
-//   const router = useRouter();
-//   const contentType = 'application/json';
-//   const [errors, setErrors] = useState({});
-//   const [message, setMessage] = useState('');
-//   const [position, setPosition] = useState({});
-//   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
-
-//   const [form, setForm] = useState({
-//     name: userForm.name,
-//     age: userForm.age,
-//     image_url: userForm.image_url,
-//     onboardingStep: 2,
-//   });
-
-//   /* The PUT method edits an existing entry in the mongodb database. */
-//   const putData = async (form) => {
-//     try {
-//       const res = await fetch(`/api/user/${userId}`, {
-//         method: 'PATCH',
-//         headers: {
-//           Accept: contentType,
-//           'Content-Type': contentType,
-//         },
-//         body: JSON.stringify({ ...form, position }),
-//       });
-
-//       // Throw error with status code in case Fetch API req failed
-//       if (!res.ok) {
-//         throw new Error(res.status);
-//       }
-
-//       const { data } = await res.json();
-
-//       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
-//       // router.push('/');
-//       advanceScreen();
-//     } catch (error) {
-//       setMessage('Failed to update pet');
-//     }
-//   };
-
-//   /* The POST method adds a new entry in the mongodb database. */
-//   const postData = async (form) => {
-//     try {
-//       const res = await fetch('/api/user', {
-//         method: 'POST',
-//         headers: {
-//           Accept: contentType,
-//           'Content-Type': contentType,
-//         },
-//         body: JSON.stringify({ ...form, position }),
-//       });
-
-//       // Throw error with status code in case Fetch API req failed
-//       if (!res.ok) {
-//         throw new Error(res.status);
-//       }
-
-//       router.push('/onboard');
-//     } catch (error) {
-//       setMessage('Failed to add pet');
-//     }
-//   };
-
-// const handleChange = (e) => {
-//   const target = e.target;
-//   const name = target.name;
-
-//   setForm({
-//     ...form,
-//     [name]: target.value,
-//   });
-// };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const errs = formValidate();
-//     if (Object.keys(errs).length === 0) {
-//       forNewPet ? postData(form) : putData(form);
-//     } else {
-//       setErrors({ errs });
-//     }
-//   };
-
-//   const getLocation = () => {
-//     const geolocation = navigator.geolocation;
-
-//     if (!geolocation) {
-//       throw new Error('Not Supported');
-//     }
-//     geolocation.getCurrentPosition(
-//       (position) => {
-//         setPosition({
-//           lat: position.coords.latitude,
-//           lng: position.coords.longitude,
-//         });
-//         return position;
-//       },
-//       () => {
-//         console.log('permission denied');
-//       }
-//     );
-//   };
-
-//   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
-//   const formValidate = () => {
-//     let err = {};
-//     if (!form.name) err.name = 'Name is required';
-//     // if (!form.owner_name) err.owner_name = 'Owner is required';
-//     // if (!form.species) err.species = 'Species is required';
-//     // if (!form.image_url) err.image_url = 'Image URL is required';
-//     return err;
-//   };
-
-//   return (
-//     <>
-//       <div className="container">
-//         <form id={formId} onSubmit={handleSubmit}>
-//           <label htmlFor="name">What is your name!!</label>
-//           <input
-//             type="text"
-//             maxLength="20"
-//             name="name"
-//             value={form.name}
-//             onChange={handleChange}
-//             required
-//           />
-
-//           <label htmlFor="age">Age</label>
-//           <input
-//             type="number"
-//             name="age"
-//             value={form.age}
-//             onChange={handleChange}
-//           />
-
-//           <div className="location-box">
-//             <label htmlFor="name">Where are you located?</label>
-//             <p>Story time would like to user your location</p>
-//             <button className="" onClick={getLocation}>
-//               Allow
-//             </button>
-//           </div>
-
-//           <button type="submit" className="btn">
-//             Submit
-//           </button>
-//         </form>
-//         <p>{message}</p>
-//         <div>
-//           {Object.keys(errors).map((err, index) => (
-//             <li key={index}>{err}</li>
-//           ))}
-//         </div>
-//       </div>
-//       <style jsx>{`
-//         form {
-//           width: 60%;
-//           margin: auto;
-//           max-width: 550px;
-//           background-color: #fff;
-//           padding: 2rem;
-//           border-radius: 10px;
-//         }
-//         input,
-//         form button,
-//         label {
-//           display: block;
-//         }
-//         form button,
-//         input,
-//         textarea {
-//           outline: none;
-//         }
-//         input,
-//         textarea {
-//           border: 1px solid rgb(199, 199, 199);
-//           border-radius: 10px;
-//           padding: 10px;
-//           font-size: 90%;
-//           width: 100%;
-//           height: 30px;
-//           color: rgb(53, 53, 53);
-//         }
-//         textarea {
-//           height: 50px;
-//         }
-//         label {
-//           margin-top: 10px;
-//         }
-//         form button {
-//           --accent: rgb(0, 162, 255);
-//           margin-top: 20px;
-//         }
-
-//         .form-container {
-//           width: 60%;
-//         }
-//         // .container {
-//         //   padding: 3rem;
-//         //   background-color: #fff;
-//         //   height: 100%;
-//         //   width: 40%;
-//         //   border-radius: 10px;
-//         // }
-//         .location-box {
-//           padding: 1rem;
-//           border: 1px solid #ebebeb;
-//           margin-top: 1rem;
-//         }
-//       `}</style>
-//     </>
-//   );
-// };
-
-// export default ProfileForm;
-
 import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import Cropper from 'react-easy-crop';
@@ -239,12 +10,9 @@ import { getOrientation } from 'get-orientation/browser';
 import ConnectionDialog from '../components/ConnectionDialog';
 import { getCroppedImg, getRotatedImage } from '../components/canvasUtils';
 import { styles } from '../components/styles';
-import Layout from '../components/layout';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr';
-import { useUser } from '../lib/hooks';
-import Link from 'next/link';
 
 const ORIENTATION_TO_ANGLE = {
   3: 180,
@@ -266,7 +34,6 @@ const Demo = ({
 
   const [message, setMessage] = useState('');
   const [position, setPosition] = useState({});
-  //   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   const [form, setForm] = useState({
     name: userForm.name,
@@ -328,9 +95,6 @@ const Demo = ({
           ...form,
           imagePreviewUrl: croppedImage1,
           userId,
-          // onboardStep,
-          // position,
-          // userName,
         }),
       });
       Router.push('/');
@@ -428,25 +192,25 @@ const Demo = ({
     }
   };
 
-  const getLocation = () => {
-    const geolocation = navigator.geolocation;
+  // const getLocation = () => {
+  //   const geolocation = navigator.geolocation;
 
-    if (!geolocation) {
-      throw new Error('Not Supported');
-    }
-    geolocation.getCurrentPosition(
-      (position) => {
-        setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-        return position;
-      },
-      () => {
-        console.log('permission denied');
-      }
-    );
-  };
+  //   if (!geolocation) {
+  //     throw new Error('Not Supported');
+  //   }
+  //   geolocation.getCurrentPosition(
+  //     (position) => {
+  //       setPosition({
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude,
+  //       });
+  //       return position;
+  //     },
+  //     () => {
+  //       console.log('permission denied');
+  //     }
+  //   );
+  // };
 
   const finishOnboard = async () => {
     try {
@@ -480,17 +244,12 @@ const Demo = ({
   //   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {};
-    if (!form.name) err.name = 'Name is required';
+    // if (!form.name) err.name = 'Name is required';
     // if (!form.owner_name) err.owner_name = 'Owner is required';
     // if (!form.species) err.species = 'Species is required';
     // if (!form.image_url) err.image_url = 'Image URL is required';
     return err;
   };
-
-  // const processForm = () => {
-  //   setLoading(true);
-  //   //
-  // };
 
   return (
     <>
@@ -521,7 +280,6 @@ const Demo = ({
                   </div> */}
           </div>
         </div>
-        {/* {imageSrc && ( */}
         {screen === 3 && (
           <React.Fragment>
             <div className={classes.cropContainer}>
@@ -582,15 +340,6 @@ const Demo = ({
                 {!loading && 'Next'}
                 {loading && <CircularProgress color="secondary" />}
               </Button>
-
-              {/* <Button
-                onClick={showCroppedImage}
-                variant="contained"
-                color="primary"
-                classes={{ root: classes.cropButton }}
-              >
-                Show Result
-              </Button> */}
             </div>
           </React.Fragment>
         )}
@@ -622,14 +371,6 @@ const Demo = ({
                   </li>
                 ))}
             </ul>
-            {/* <ImgDialog
-              img={croppedImage}
-              userId={userId}
-              onSuccessSubmit={onSuccessSubmit}
-              addConnection={addConnection}
-              onClose={onClose}
-              onSelect={onSelect}
-            /> */}
             <ConnectionDialog
               userId={userId}
               onSuccessSubmit={onSuccessSubmit}
@@ -673,76 +414,6 @@ const Demo = ({
                 <i className="bar"></i>
                 {/* <i className="input-error">error here</i> */}
               </div>
-              {/* <div className="form-group">
-                <select>
-                  <option>please select...</option>
-                  <option>Mother</option>
-                  <option>Father</option>
-                  <option>Grandmother</option>
-                  <option>Grandfather</option>
-                  <option>Uncle</option>
-                  <option>Aunt</option>
-                  <option>Cousin</option>
-                  <option>Brother</option>
-                  <option>Sister</option>
-                </select>
-                <label className="control-label" for="select">
-                  How are they connected to you
-                </label>
-                <i className="bar"></i>
-              </div> */}
-
-              {/* <div className="form-group">
-                  <input
-                    type="text"
-                    required="required"
-                    placeholder="stuf stuf stuuuffff"
-                  />
-                  <label className="control-label" for="input">
-                    Surname
-                  </label>
-                  <i className="bar"></i>
-                  <i className="input-error">error here</i>
-                </div> */}
-              {/* <div className="form-group">
-                  <textarea required="required"></textarea>
-                  <label className="control-label" for="textarea">
-                    Textarea
-                  </label>
-                  <i className="bar"></i>
-                </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" checked="checked" />
-                <i className="helper"></i>I'm the label from a checkbox
-              </label>
-            </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" />
-                <i className="helper"></i>I'm thae label from a checkbox
-              </label>
-            </div> */}
-              {/* <div className="form-radio">
-              <div className="radio">
-                <label>
-                  <input type="radio" name="radio" checked="checked" />
-                  <i className="helper"></i>I'm the label from a radio button
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="radio" />
-                  <i className="helper"></i>I'm the label from a radio button
-                </label>
-              </div>
-            </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" />
-                <i className="helper"></i>I'm the label from a checkbox
-              </label>
-            </div> */}
             </form>
 
             <h3>Upload your profile picture</h3>

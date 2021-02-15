@@ -7,15 +7,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { getOrientation } from 'get-orientation/browser';
-import ImgDialog from '../components/ImgDialog';
 import { getCroppedImg, getRotatedImage } from '../components/canvasUtils';
 import { styles } from '../components/styles';
-import Layout from '../components/layout';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr';
-import { useUser } from '../lib/hooks';
-import Link from 'next/link';
 
 const ORIENTATION_TO_ANGLE = {
   3: 180,
@@ -347,16 +343,6 @@ const Demo = ({
                   onChange={(e, rotation) => setRotation(rotation)}
                 />
               </div>
-
-              {/* <Button
-                onClick={() => processForm()}
-                variant="contained"
-                color="primary"
-                classes={{ root: classes.cropButton }}
-              >
-                {!loading && 'Next'}
-                {loading && <CircularProgress color="secondary" />}
-              </Button> */}
             </div>
             <div>
               <Button
@@ -365,42 +351,18 @@ const Demo = ({
                 color="primary"
                 classes={{ root: classes.cropButton }}
               >
-                Add Connection
+                {!loading && 'Add Connection'}
+                {loading && <CircularProgress color="secondary" />}
               </Button>
             </div>
           </React.Fragment>
         )}
 
-        {/* {screen === 4 && (
-          <div>
-            Add Connections
-            <button onClick={() => setAddConnection(true)}>Add</button>
-            <Link href="/">
-              <button>Add Later</button>
-            </Link>
-            <ImgDialog
-              img={croppedImage}
-              userId={userId}
-              onSuccessSubmit={onSuccessSubmit}
-              addConnection={addConnection}
-              onClose={onClose}
-              onSelect={onSelect}
-            />
-          </div>
-        )} */}
         {screen === 1 && (
           <div>
             <form>
               <h1>Submit a new challenge</h1>
               <div className="form-group">
-                {/* <input
-             type="text"
-             maxLength="20"
-             name="name"
-             value={form.name}
-             onChange={handleChange}
-             required
-           /> */}
                 <input
                   type="text"
                   maxLength="20"
@@ -442,15 +404,7 @@ const Demo = ({
                   onChange={(e) => handleChange(e)}
                 >
                   <option value="">please select...</option>
-                  {/* <option value="Mother">Mother</option>
-                  <option value="Father">Father</option>
-                  <option value="Grandmother">Grandmother</option>
-                  <option value="Grandfather">Grandfather</option>
-                  <option value="Uncle">Uncle</option>
-                  <option value="Aunt">Aunt</option>
-                  <option value="Cousin">Cousin</option>
-                  <option value="Brother">Brother</option>
-                  <option value="Sister">Sister</option>  */}
+
                   {user.connections.map((connection) => (
                     <option value={connection._id}>{connection.name}</option>
                   ))}
@@ -463,58 +417,6 @@ const Demo = ({
                   <i className="input-error">Please fill out name</i>
                 )}
               </div>
-
-              {/* <div className="form-group">
-                  <input
-                    type="text"
-                    required="required"
-                    placeholder="stuf stuf stuuuffff"
-                  />
-                  <label className="control-label" for="input">
-                    Surname
-                  </label>
-                  <i className="bar"></i>
-                  <i className="input-error">error here</i>
-                </div> */}
-              {/* <div className="form-group">
-                  <textarea required="required"></textarea>
-                  <label className="control-label" for="textarea">
-                    Textarea
-                  </label>
-                  <i className="bar"></i>
-                </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" checked="checked" />
-                <i className="helper"></i>I'm the label from a checkbox
-              </label>
-            </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" />
-                <i className="helper"></i>I'm thae label from a checkbox
-              </label>
-            </div> */}
-              {/* <div className="form-radio">
-              <div className="radio">
-                <label>
-                  <input type="radio" name="radio" checked="checked" />
-                  <i className="helper"></i>I'm the label from a radio button
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="radio" />
-                  <i className="helper"></i>I'm the label from a radio button
-                </label>
-              </div>
-            </div> */}
-              {/* <div className="checkbox">
-              <label>
-                <input type="checkbox" />
-                <i className="helper"></i>I'm the label from a checkbox
-              </label>
-            </div> */}
             </form>
             {challenge.type === 'image-submit' && (
               <div>

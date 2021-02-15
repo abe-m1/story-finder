@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr';
-import { useUser } from '../lib/hooks';
 
 const ImageForm = ({
   formId,
