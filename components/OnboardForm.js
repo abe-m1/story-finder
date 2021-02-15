@@ -328,30 +328,71 @@ const Demo = ({
                 />
               </div>
 
-              <Button
+              {/* <Button
                 onClick={() => processForm()}
                 variant="contained"
                 color="primary"
                 classes={{ root: classes.cropButton }}
+              > */}
+              <button
+                onClick={() => processForm()}
+                className="button"
+                type="button"
+                style={{ margin: 0 }}
               >
-                {!loading && 'Next'}
-                {loading && <CircularProgress color="secondary" />}
-              </Button>
+                {!loading && 'Confirm Image'}
+                {loading && <div className="loader"></div>}
+              </button>
+
+              {/* <CircularProgress color="secondary" /> */}
+              {/* <div className="loader"></div> */}
+
+              {/* </Button> */}
             </div>
           </React.Fragment>
         )}
         {screen === 1 && (
-          <div>
-            <p>To get started please fill in some information about yourself</p>
-            <button onClick={() => setScreen(2)}>next</button>
+          <div style={{ padding: '2rem' }}>
+            <h2>Welcome to Story time</h2>
+            <p style={{ marginBottom: '3rem' }}>
+              To get started please fill in some information about yourself
+            </p>
+            {/* <Button
+              onClick={() => setScreen(2)}
+              variant="contained"
+              color="primary"
+              classes={{ root: classes.cropButton }}
+            >
+              Let's get started
+            </Button> */}
+            <div className="button-container">
+              <button
+                onClick={() => setScreen(2)}
+                className="button"
+                type="button"
+              >
+                <span>Lets get started</span>
+              </button>
+            </div>
           </div>
         )}
         {screen === 4 && (
           <div>
-            Add Connections
-            <button onClick={() => setAddConnection(true)}>Add</button>
-            <button onClick={finishOnboard}>Start first assignment</button>
-            {connections.length}
+            <h1>Add Connections</h1>
+            <p>
+              Start populating your family tree by adding your closest
+              connections
+            </p>
+            <button
+              onClick={() => setAddConnection(true)}
+              className="button"
+              type="button"
+            >
+              Add Connections
+            </button>
+            <button className="button" type="button" onClick={finishOnboard}>
+              Finish Setup
+            </button>
             <ul>
               {connections.length > 0 &&
                 connections.map((connection) => (
@@ -377,7 +418,7 @@ const Demo = ({
           </div>
         )}
         {screen === 2 && (
-          <div>
+          <div style={{ padding: '2rem' }}>
             <form>
               <h1>Tell us about yourself</h1>
               <div className="form-group">
@@ -414,7 +455,12 @@ const Demo = ({
             </form>
 
             <h3>Upload your profile picture</h3>
-            <input type="file" onChange={onFileChange} accept="image/*" />
+            <div style={{ marginTop: '2rem' }}>
+              <label className="button">
+                <input type="file" onChange={onFileChange} accept="image/*" />
+                Select Image
+              </label>
+            </div>
           </div>
         )}
       </div>
@@ -574,7 +620,7 @@ const Demo = ({
           left: 50%;
           bottom: -0.0625rem;
           position: absolute;
-          background: #ef286b;
+          background: #448aff;
           transition: left 0.28s ease, width 0.28s ease;
           z-index: 2;
         }
@@ -666,7 +712,7 @@ const Demo = ({
         .form-group select:focus ~ .control-label,
         .form-group input:focus ~ .control-label,
         .form-group textarea:focus ~ .control-label {
-          color: #ef286b;
+          color: #448aff;
         }
         .form-group select:focus ~ .bar::before,
         .form-group input:focus ~ .bar::before,
@@ -723,17 +769,17 @@ const Demo = ({
         }
         .radio .helper::after {
           transform: scale(0);
-          background-color: #ef286b;
-          border-color: #ef286b;
+          background-color: #448aff;
+          border-color: #448aff;
         }
         .radio label:hover .helper {
-          color: #ef286b;
+          color: #448aff;
         }
         .radio input:checked ~ .helper::after {
           transform: scale(0.5);
         }
         .radio input:checked ~ .helper::before {
-          color: #ef286b;
+          color: #448aff;
         }
 
         .checkbox {
@@ -757,7 +803,7 @@ const Demo = ({
           position: absolute;
           height: 0;
           width: 0.2rem;
-          background-color: #ef286b;
+          background-color: #448aff;
           display: block;
           transform-origin: left top;
           border-radius: 0.25rem;
@@ -777,10 +823,10 @@ const Demo = ({
           transform: rotate(-45deg);
         }
         .checkbox label:hover .helper {
-          color: #ef286b;
+          color: #448aff;
         }
         .checkbox input:checked ~ .helper {
-          color: #ef286b;
+          color: #448aff;
         }
         .checkbox input:checked ~ .helper::after,
         .checkbox input:checked ~ .helper::before {
@@ -822,10 +868,10 @@ const Demo = ({
 
         .button {
           position: relative;
-          background: currentColor;
-          border: 1px solid currentColor;
+          background: #3f51b5;
+          border: 1px solid #3f51b5;
           font-size: 1.1rem;
-          color: #f3578c;
+          color: #fff;
           margin: 3rem 0;
           padding: 0.75rem 3rem;
           cursor: pointer;
@@ -856,7 +902,7 @@ const Demo = ({
           transform: translate(-50%, -50%) scale(0);
         }
         .button:hover {
-          color: #ef286b;
+          color: #448aff;
           box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
             0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
         }
@@ -973,6 +1019,38 @@ const Demo = ({
         }
         .user__circle {
           border: 2px solid #9681b6;
+        }
+
+        input[type='file'] {
+          display: none;
+        }
+
+        .custom-file-upload {
+          border: 1px solid #ccc;
+          display: inline-block;
+          padding: 6px 12px;
+          cursor: pointer;
+          background-color: #448aff;
+          color: #fff;
+        }
+
+        .loader {
+          margin: 0 2rem;
+          border: 4px solid #f3f3f3; /* Light grey */
+          border-top: 4px solid #3498db; /* Blue */
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </>

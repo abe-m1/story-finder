@@ -63,14 +63,10 @@ const Home = () => {
                     <p className="user__type">Verified Graduate</p>
                   </div>
                 </div>
-                <h2 className="light-headline">
-                  I received a job offer mid-course, and the subjects
-                </h2>
+                <h2 className="light-headline">Your next challenge</h2>
                 <p className="testimonial">
-                  “ I was an EMT for many years before I joined the bootcamp.
-                  I’ve been looking to make a transition and have heard some
-                  people who had an amazing experience here. I signed up for the
-                  free
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
               </div>
 
@@ -82,9 +78,7 @@ const Home = () => {
                     <p className="user__type">Verified Graduate</p>
                   </div>
                 </div>
-                <h2 className="light-headline">
-                  The team was very supportive and kept me motivated
-                </h2>
+                <h2 className="light-headline">Latest Connection</h2>
                 <p className="testimonial">
                   “ I started as a total newbie with virtually no coding skills.
                 </p>
@@ -98,9 +92,7 @@ const Home = () => {
                     <p className="user__type-dark">Verified Graduate</p>
                   </div>
                 </div>
-                <h2 className="dark-headline">
-                  An overall wonderful and rewarding experience
-                </h2>
+                <h2 className="dark-headline">Add Connection</h2>
                 <p className="testimonial-dark">
                   “ Thank you for the wonderful experience! I now have a job I
                   really enjoy,
@@ -119,11 +111,7 @@ const Home = () => {
                     <p className="user__type">Verified Graduate</p>
                   </div>
                 </div>
-                <h2 className="light-headline">
-                  Awesome teaching support from TAs who did the bootcamp
-                  themselves. Getting guidance from them and learning from their
-                  experiences was easy.
-                </h2>
+                <h2 className="light-headline">This was your last challenge</h2>
                 <p className="testimonial">
                   “ The staff seem genuinely concerned about my progress which I
                   find really refreshing. The program gave me the confidence
@@ -139,14 +127,9 @@ const Home = () => {
                     <p className="user__type-dark">Verified Graduate</p>
                   </div>
                 </div>
-                <h2 className="dark-headline">
-                  Such a life-changing experience. Highly recommended!
-                </h2>
+                <h2 className="dark-headline">Quote of the day</h2>
                 <p className="testimonial-dark">
-                  “ Before joining the bootcamp, I’ve never written a line of
-                  code. I needed some structure from professionals who can help
-                  me learn programming step by step. I was encouraged to enroll
-                  by a former student of theirs who can only say wonderful
+                  “ Birds that are born in a cage think that freedom is a crime"
                 </p>
               </div>
             </div>

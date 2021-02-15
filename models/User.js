@@ -68,7 +68,7 @@ const UserSchema = new mongoose.Schema({
   },
   nextChallengeIndex: {
     type: Number,
-    default: 0,
+    default: 1,
   },
   tree: { type: String },
   connections: [connectionSchema],
