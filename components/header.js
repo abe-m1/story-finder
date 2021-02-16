@@ -56,6 +56,11 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
+                      <Link href="/profile">
+                        <a href="#">Profile</a>
+                      </Link>
+                    </li>
+                    <li>
                       <a href="/api/logout">Logout</a>
                     </li>
                   </ul>

@@ -387,6 +387,7 @@ const Demo = ({
               onClick={() => setAddConnection(true)}
               className="button"
               type="button"
+              style={{ marginRight: '1rem' }}
             >
               Add Connections
             </button>

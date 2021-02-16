@@ -47,6 +47,9 @@ const UserSchema = new mongoose.Schema({
   onboardingComplete: {
     type: Boolean,
   },
+  userLocation: {
+    type: String,
+  },
 
   onboardingStep: {
     type: Number,

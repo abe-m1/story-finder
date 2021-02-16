@@ -30,7 +30,7 @@ const ChallengeItem = ({
           <span>{challenge.challengeName}</span>{' '}
           <span className="seperator">&bull;</span>{' '}
           <span>{challenge.challengeName}</span> */}
-          <spam>{challenge.challengeDescription}</spam>
+          <span>{challenge.challengeDescription}</span>
           <hr className="horizontal-rule" />
         </div>
         <div className="filter-items">
