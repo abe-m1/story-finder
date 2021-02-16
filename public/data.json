@@ -1,7 +1,7 @@
 [{
   "id": 1,
   "challengeName": "first challenge",
-  "challengeDescription": "this is the first challenge",
+  "challengeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
   "type": "text-submit",
   "challengeType": "Image",
   "tags": ["tag1", "tag2"]

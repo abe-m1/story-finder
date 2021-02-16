@@ -39,17 +39,6 @@ const Home = () => {
 
         {user && user.onboardingComplete && (
           <div className="main-body">
-            {/* Add Connections
-            <button onClick={() => setAddConnection(true)}>Add</button>
-            <Link href="/challenges">
-              <button>s</button>
-            </Link>
-            <ConnectionDialog
-              userId={user._id}
-              onSuccessSubmit={onSuccessSubmit}
-              addConnection={addConnection}
-              onClose={onClose}
-            /> */}
             <div className="grid">
               <div className="testimonial-container container--one">
                 <div className="user">
@@ -93,10 +82,17 @@ const Home = () => {
                   </div>
                 </div>
                 <h2 className="dark-headline">Add Connection</h2>
-                <p className="testimonial-dark">
+                {/* <p className="testimonial-dark">
                   “ Thank you for the wonderful experience! I now have a job I
                   really enjoy,
-                </p>
+                </p> */}
+                <a onClick={() => setAddConnection(true)}>Add a connection</a>
+                <ConnectionDialog
+                  userId={user._id}
+                  onSuccessSubmit={onSuccessSubmit}
+                  addConnection={addConnection}
+                  onClose={onClose}
+                />
               </div>
 
               <div className="testimonial-container container--dark">

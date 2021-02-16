@@ -1,15 +1,20 @@
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDetectOutsideClick } from '../utils/useDetectOutsideClick';
 
 import { useUser } from '../lib/hooks';
 
 const Header = () => {
   const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const onClick = () => setIsActive(!isActive);
-  const user = useUser();
+  // const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const [isActive, setIsActive] = useState(false);
 
+  const onClick = () => {
+    console.log('firing');
+    setIsActive(!isActive);
+  };
+  const user = useUser();
+  console.log(isActive);
   return (
     <header>
       <nav>
@@ -37,7 +42,7 @@ const Header = () => {
                 </Link>
               </li>
               <div className="menu-container">
-                <button onClick={onClick} className="menu-trigger">
+                <button onClick={() => onClick()} className="menu-trigger">
                   <span>{user.name}</span>
                   <img
                     src={user.image_url || './default-profile.png'}

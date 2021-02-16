@@ -217,8 +217,7 @@ const Demo = ({
 
       mutate(`/api/user/${userId}`, data, false); // Update the local data without a revalidation
       onSuccessSubmit(data);
-      setScreen(screen + 1);
-      // router.push('/');
+      router.push('/challenges');
     } catch (error) {
       setMessage('Failed to update user');
     }
@@ -431,7 +430,7 @@ const Demo = ({
                   value={form.challengeResponse}
                   placeholder="Add your response"
                   rows="10"
-                  cols="50"
+                  cols="70"
                   type="text"
                 />
                 <Button
