@@ -84,9 +84,15 @@ const Home = () => {
                     <p className="user__name">Badge 1</p>
                     <p className="user__type">Badge 1 is for ...</p>
                   </div>
-                  <button style={{ marginLeft: 'auto' }}>
-                    Start Challenge
-                  </button>
+                  <Link href="/challenges">
+                    <button
+                      className="button"
+                      type="button"
+                      style={{ margin: 0, marginLeft: 'auto' }}
+                    >
+                      View Challenges
+                    </button>
+                  </Link>
                 </div>
                 <h2 className="light-headline">
                   Your next challenge:{' '}
@@ -143,9 +149,15 @@ const Home = () => {
                     <p className="user__name">Badge 1</p>
                     <p className="user__type">Badge 1 is for ...</p>
                   </div>
-                  <button style={{ marginLeft: 'auto' }}>
-                    Start Challenge
-                  </button>
+                  <Link href="/challenges">
+                    <button
+                      className="button"
+                      type="button"
+                      style={{ margin: 0, marginLeft: 'auto' }}
+                    >
+                      Start Challenge
+                    </button>
+                  </Link>
                 </div>
                 <h2 className="light-headline">
                   Your latest finished challenge:{' '}
