@@ -5,7 +5,7 @@ import Layout from '../components/layout';
 import Tree from 'react-tree-graph';
 import Modal from 'react-modal';
 import 'react-tree-graph/dist/style.css';
-import ConnectionDialog from '../components/connectionDialog';
+import ConnectionDialog from '../components/ConnectionDialog';
 
 const FamilyTree = () => {
   const user = useUser({ redirectTo: '/login' });

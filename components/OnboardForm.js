@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { getOrientation } from 'get-orientation/browser';
-import ConnectionDialog from '../components/ConnectionDialog';
+import ConnectionDialog from './ConnectionDialog';
 import { getCroppedImg, getRotatedImage } from '../components/canvasUtils';
 import { styles } from '../components/styles';
 import Router from 'next/router';
