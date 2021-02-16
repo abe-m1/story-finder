@@ -2,7 +2,7 @@ import { useUser } from '../lib/hooks';
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Layout from '../components/layout';
-import ConnectionDialog from '../components/ConnectionDialog';
+import ConnectionDialog from '../components/connectionDialog';
 import Form from '../components/OnboardForm';
 
 const Home = () => {
