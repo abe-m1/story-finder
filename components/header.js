@@ -10,11 +10,9 @@ const Header = () => {
   const [isActive, setIsActive] = useState(false);
 
   const onClick = () => {
-    console.log('firing');
     setIsActive(!isActive);
   };
   const user = useUser();
-  console.log(isActive);
   return (
     <header>
       <nav>

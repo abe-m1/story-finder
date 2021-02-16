@@ -47,7 +47,6 @@ const ProfileForm = ({
       // router.push('/');
       advanceScreen();
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update user');
     }
   };

@@ -37,7 +37,6 @@ export default async function handler(req, res) {
 
     case 'PATCH' /* Edit a model by its ID */:
       try {
-        console.log(req.body.location);
         const publicID = `story-${Math.random().toString(24).slice(-8)}`;
         const saveToCloud = await saveImage(req.body.imagePreviewUrl, publicID);
 

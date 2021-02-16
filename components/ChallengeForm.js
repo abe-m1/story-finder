@@ -29,7 +29,6 @@ const Demo = ({
   user,
   challenge,
 }) => {
-  console.log('form user', user);
   const contentType = 'application/json';
   const router = useRouter();
   const [errors, setErrors] = useState({});
@@ -168,7 +167,6 @@ const Demo = ({
   //new
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
-    console.log('in put data');
     try {
       let croppedImage;
       if (imageSrc) {
@@ -178,7 +176,6 @@ const Demo = ({
           rotation
         );
       }
-      console.log('IN PATCH');
       const geoResult = await opencage.geocode({
         q: form.location,
         key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
@@ -242,7 +239,6 @@ const Demo = ({
   // };
 
   const processForm = () => {
-    console.log('process firing');
     setLoading(true);
 
     const errs = formValidate();

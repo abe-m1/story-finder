@@ -77,7 +77,6 @@ const Demo = ({
   }, []);
 
   const onSuccessSubmit = (data) => {
-    console.log('on su submit', data);
     //TODO get data more directly instead of passing up props
     setConnections(data.connections);
     setAddConnection(false);
@@ -166,7 +165,6 @@ const Demo = ({
       setScreen(screen + 1);
       // router.push('/');
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update user');
     }
   };
@@ -236,7 +234,6 @@ const Demo = ({
 
       router.push('/challenges');
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update user');
     }
   };

@@ -16,7 +16,6 @@ const Post = () => {
     let challenge = challenges.find(
       (item) => item.id === parseInt(router.query.id)
     );
-    console.log(challenge);
     setCurrentChallenge(challenge);
   });
   const { id } = router.query;

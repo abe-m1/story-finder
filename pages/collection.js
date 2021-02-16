@@ -71,7 +71,6 @@ const Collection = () => {
 };
 
 // export async function getServerSideProps(props) {
-//   console.log('props', props);
 //   // await dbConnect();
 
 //   /* find all the data in our database */

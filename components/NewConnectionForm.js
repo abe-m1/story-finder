@@ -66,7 +66,6 @@ const NewConnectionForm = ({
       onSuccessSubmit();
       // router.push('/');
     } catch (error) {
-      console.log(error);
       setMessage('Failed to update user');
     }
   };
@@ -112,7 +111,6 @@ const NewConnectionForm = ({
 
       onSuccessSubmit(data);
     } catch (error) {
-      console.log(error);
       setMessage('Failed to add user');
     }
   };

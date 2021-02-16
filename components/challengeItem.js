@@ -7,7 +7,6 @@ const ChallengeItem = ({
   currentChallenge,
   completed,
 }) => {
-  console.log(challenge);
   const imageUrl = `/challenge-icon-${challenge.id}.jpg`;
   return (
     <li className={`item-container ${completed ? '' : 'fade'}`}>
