@@ -45,6 +45,9 @@ const Signup = () => {
     <Layout>
       <div className="page">
         <div className="login">
+          <p style={{ color: '#FF0000', fontSize: '11px' }}>
+            Test Username: tester1, Password: password
+          </p>
           <h2>Signup</h2>
           <Form
             isLogin={false}

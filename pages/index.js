@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Layout from '../components/layout';
 import ConnectionDialog from '../components/connectionDialog';
 import Form from '../components/OnboardForm';
+import challenges from '../public/data.json';
 
 const Home = () => {
   const user = useUser();
@@ -78,45 +79,49 @@ const Home = () => {
             <div className="grid">
               <div className="testimonial-container container--one">
                 <div className="user">
-                  <img
-                    className="user__circle"
-                    src="images/image-daniel.jpg"
-                    alt=""
-                  />
+                  <img className="user__badge" src="/badge.png" alt="" />
                   <div>
-                    <p className="user__name">Daniel Clifford</p>
-                    <p className="user__type">Verified Graduate</p>
+                    <p className="user__name">Badge 1</p>
+                    <p className="user__type">Badge 1 is for ...</p>
                   </div>
+                  <button style={{ marginLeft: 'auto' }}>
+                    Start Challenge
+                  </button>
                 </div>
-                <h2 className="light-headline">Your next challenge</h2>
+                <h2 className="light-headline">
+                  Your next challenge:{' '}
+                  {challenges[user.nextChallengeIndex].challengeName}
+                </h2>
                 <p className="testimonial">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  {challenges[user.nextChallengeIndex].challengeDescription}
                 </p>
               </div>
 
               <div className="testimonial-container container--two">
-                <div className="user">
-                  <img src="images/image-jonathan.jpg" alt="" />
-                  <div>
-                    <p className="user__name">Jonathan Walters</p>
-                    <p className="user__type">Verified Graduate</p>
-                  </div>
-                </div>
-                <h2 className="light-headline">Latest Connection</h2>
-                <p className="testimonial">
-                  “ I started as a total newbie with virtually no coding skills.
-                </p>
+                <h3 className="light-headline latest">Latest Connections</h3>
+                {user.connections.length === 0 && <p>add connections</p>}
+                {user.connections.length > 0 &&
+                  user.connections
+                    .reverse()
+                    .slice(0, 3)
+                    .map((connection) => (
+                      <li key={connection._id} className="user">
+                        <img
+                          className="user__circle"
+                          src={connection.connectionImage}
+                          alt=""
+                        />
+                        <div>
+                          <p className="user__name">{connection.name}</p>
+                          <p className="user__type">
+                            {connection.connectionType}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
               </div>
 
               <div className="testimonial-container container--three">
-                <div className="user">
-                  <img src="images/image-jeanette.jpg" alt="" />
-                  <div>
-                    <p className="user__name-dark">Jeanette Harmon</p>
-                    <p className="user__type-dark">Verified Graduate</p>
-                  </div>
-                </div>
                 <h2 className="dark-headline">Add Connection</h2>
                 {/* <p className="testimonial-dark">
                   “ Thank you for the wonderful experience! I now have a job I
@@ -133,32 +138,25 @@ const Home = () => {
 
               <div className="testimonial-container container--dark">
                 <div className="user">
-                  <img
-                    className="circle"
-                    src="images/image-patrick.jpg"
-                    alt=""
-                  />
+                  <img className="user__badge" src="/badge.png" alt="" />
                   <div>
-                    <p className="user__name">Patrick Abrams</p>
-                    <p className="user__type">Verified Graduate</p>
+                    <p className="user__name">Badge 1</p>
+                    <p className="user__type">Badge 1 is for ...</p>
                   </div>
+                  <button style={{ marginLeft: 'auto' }}>
+                    Start Challenge
+                  </button>
                 </div>
-                <h2 className="light-headline">This was your last challenge</h2>
+                <h2 className="light-headline">
+                  Your latest finished challenge:{' '}
+                  {challenges[user.nextChallengeIndex - 1].challengeName}
+                </h2>
                 <p className="testimonial">
-                  “ The staff seem genuinely concerned about my progress which I
-                  find really refreshing. The program gave me the confidence
-                  necessary to be able to go out in the world and present myself
+                  {challenges[user.nextChallengeIndex - 1].challengeDescription}
                 </p>
               </div>
 
               <div className="testimonial-container container--five">
-                <div className="user">
-                  <img src="images/image-kira.jpg" alt="" />
-                  <div>
-                    <p className="user__name-dark">Kira Whittle</p>
-                    <p className="user__type-dark">Verified Graduate</p>
-                  </div>
-                </div>
                 <h2 className="dark-headline">Quote of the day</h2>
                 <p className="testimonial-dark">
                   “ Birds that are born in a cage think that freedom is a crime"
@@ -274,7 +272,7 @@ const Home = () => {
           .container--one {
             background: url(/images/bg-pattern-quotation.svg) no-repeat;
             background-position: 80% 0;
-            background-color: #7541c8;
+            background-color: #a27fda;
           }
           @media (min-width: 900px) {
             .container--one {
@@ -325,10 +323,11 @@ const Home = () => {
 
           .user {
             display: flex;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
           }
-          .user img {
-            width: 40px;
+
+          .user__badge {
+            width: 65px;
             border-radius: 50%;
             margin-right: 2rem;
           }
@@ -349,7 +348,10 @@ const Home = () => {
             opacity: 50%;
           }
           .user__circle {
+            width: 47px;
             border: 2px solid #9681b6;
+            border-radius: 50%;
+            margin-right: 1.5rem;
           }
 
           .testimonial {
@@ -503,6 +505,10 @@ const Home = () => {
           }
           .mockups img {
             width: 100%;
+          }
+          .latest {
+            margin-bottom: 2rem;
+            font-size: 14px;
           }
         `}</style>
       </div>

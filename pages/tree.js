@@ -51,12 +51,19 @@ const FamilyTree = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [selectedNode, setSelectedNode] = React.useState('');
   const [addConnection, setAddConnection] = useState(false);
+  const [connections, setConnections] = useState([]);
+
+  useEffect(() => {
+    setConnections(user.connections);
+  }, []);
   function openModal(e, n) {
     setIsOpen(true);
     setSelectedNode(n);
   }
 
-  const onSuccessSubmit = () => {
+  const onSuccessSubmit = (data) => {
+    //TODO get data more directly instead of passing up props
+    setConnections(data.connections);
     setAddConnection(false);
   };
 
@@ -91,9 +98,9 @@ const FamilyTree = () => {
           </div>
 
           <ul>
-            {user.connections.length === 0 && <p>add connections</p>}
-            {user.connections.length > 0 &&
-              user.connections.map((connection) => (
+            {connections.length === 0 && <p>add connections</p>}
+            {connections.length > 0 &&
+              connections.map((connection) => (
                 <li key={connection._id} className="user">
                   <img
                     className="user__circle"
