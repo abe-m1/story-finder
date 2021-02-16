@@ -64,6 +64,10 @@ const FamilyTree = () => {
     setAddConnection(false);
   }, []);
 
+  if (!user || user.isLoggedIn === false) {
+    return <Layout>Loading...</Layout>;
+  }
+
   return (
     <Layout>
       <div className="flex-container">
