@@ -1,21 +1,69 @@
 import { useUser } from '../lib/hooks';
 import Layout from '../components/layout';
+import Card from '../components/Card';
 
 const Collection = () => {
   const user = useUser({ redirectTo: '/login' });
   return (
     <Layout>
-      <h1>Collection</h1>
-      {user && (
-        <>
-          <p>Your session:</p>
-        </>
-      )}
+      <div className="container">
+        <h1>Collection</h1>
+        {user && (
+          <>
+            <div className="cards">
+              <Card
+                img="https://res.cloudinary.com/dsduoklii/image/upload/w_400,h_300/v1613438765/people/story-i39nj4ga.jpg"
+                title="Lorem ipsum dolor sit amet"
+                connection="My Connection"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore."
+              />
+              <Card
+                img="https://res.cloudinary.com/dsduoklii/image/upload/w_400,h_300/v1613438765/people/story-i39nj4ga.jpg"
+                title="Lorem ipsum dolor sit amet"
+                connection="My Connection"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore."
+              />
+              <Card
+                img="https://res.cloudinary.com/dsduoklii/image/upload/w_400,h_300/v1613438765/people/story-i39nj4ga.jpg"
+                title="Lorem ipsum dolor sit amet"
+                connection="My Connection"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore."
+              />
+              <Card
+                img="https://res.cloudinary.com/dsduoklii/image/upload/w_400,h_300/v1613438765/people/story-i39nj4ga.jpg"
+                title="Lorem ipsum dolor sit amet"
+                connection="My Connection"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore."
+              />
+              <Card
+                img="https://res.cloudinary.com/dsduoklii/image/upload/w_400,h_300/v1613438765/people/story-i39nj4ga.jpg"
+                title="Lorem ipsum dolor sit amet"
+                connection="My Connection"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore."
+              />
+            </div>
+          </>
+        )}
+      </div>
 
       <style jsx>{`
         pre {
           white-space: pre-wrap;
           word-wrap: break-word;
+        }
+        .container {
+          padding: 2rem;
+        }
+        .cards {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          flex-wrap: wrap;
         }
       `}</style>
     </Layout>
