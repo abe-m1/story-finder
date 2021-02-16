@@ -144,7 +144,7 @@ const NewConnectionForm = ({
         setCoords(data.results[0].geometry);
       })
       .catch((error) => {
-        console.log('error', error.message);
+        // console.log('error', error.message);
       });
   };
 
