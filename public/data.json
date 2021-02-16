@@ -2,10 +2,33 @@
   "id": 1,
   "challengeName": "first challenge",
   "challengeDescription": "this is the first challenge",
-  "type": "image-submit"
+  "type": "text-submit",
+  "challengeType": "Image",
+  "tags": ["tag1", "tag2"]
 },
 {"id": 2,
   "challengeName": "second challenge",
   "challengeDescription": "this is the second challenge",
-  "type": "text-submit"}]
+  "type": "text-submit",
+  "challengeType": "Sort",
+  "tags": ["tag1", "tag2"]},
+  
+{"id": 3,
+  "challengeName": "third challenge",
+  "challengeDescription": "this is the third challenge",
+  "challengeType": "Image",
+  "type": "text-submit",
+  "tags": ["tag1", "tag2"]},
+{"id": 4,
+  "challengeName": "fourth challenge",
+  "challengeDescription": "this is the fourth challenge",
+  "type": "text-submit",
+  "challengeType": "Video",
+  "tags": ["tag1", "tag2"]},
+{"id": 5,
+    "challengeName": "fifth challenge",
+    "challengeDescription": "this is the fifth challenge",
+    "type": "text-submit",
+    "challengeType": "Written",
+    "tags": ["tag1", "tag2"]}]
 

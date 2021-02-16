@@ -28,7 +28,7 @@ const Header = () => {
               </li>
               <li>
                 <Link href="/tree">
-                  <a>Family Tree</a>
+                  <a>My Connections</a>
                 </Link>
               </li>
               <li>
@@ -169,6 +169,7 @@ const Header = () => {
         }
 
         .menu.active {
+          z-index: 10;
           opacity: 1;
           visibility: visible;
           transform: translateY(0);

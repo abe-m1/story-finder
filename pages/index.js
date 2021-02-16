@@ -42,7 +42,7 @@ const Home = () => {
             {/* Add Connections
             <button onClick={() => setAddConnection(true)}>Add</button>
             <Link href="/challenges">
-              <button>View Challenges</button>
+              <button>s</button>
             </Link>
             <ConnectionDialog
               userId={user._id}

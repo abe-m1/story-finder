@@ -1,10 +1,18 @@
 import Link from 'next/link';
 
-const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
+const ChallengeItem = ({
+  challenge,
+  challengeName,
+  challengeDescription,
+  currentChallenge,
+  completed,
+}) => {
+  console.log(challenge);
+  const imageUrl = `/challenge-icon-${challenge.id}.jpg`;
   return (
-    <li className="item-container">
+    <li className={`item-container ${completed ? '' : 'fade'}`}>
       <div>
-        <img className="img" alt="challenge picture" />
+        <img src={imageUrl} className="img" alt="challenge picture" />
       </div>
       <div className="challenge-info">
         <div className="top-line">
@@ -12,21 +20,37 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
           <Link href={`/challenge/${challenge.id}`}>
             <span className="new">View Challenge</span>
           </Link>
-          <span className="new">Test!</span>{' '}
-          <span className="featured">Places</span>
+          <span className="new">{challenge.challengeType}</span>
+          {currentChallenge === challenge.id && (
+            <span className="featured">Current</span>
+          )}
           <p className="position">{challenge.challengeName}</p>
-          <span>{challenge.challengeName}</span>{' '}
+          {/* <span>{challenge.challengeName}</span>{' '}
           <span className="seperator">&bull;</span>{' '}
           <span>{challenge.challengeName}</span>{' '}
           <span className="seperator">&bull;</span>{' '}
-          <span>{challenge.challengeName}</span>
+          <span>{challenge.challengeName}</span> */}
+          <spam>{challenge.challengeDescription}</spam>
           <hr className="horizontal-rule" />
         </div>
         <div className="filter-items">
-          <span className="tag">{challenge.challengeName}</span>
-          <span className="tag">{challenge.challengeName}</span>
+          {challenge.tags.map((tag) => (
+            <span id={tag} className="tag">
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
+      {currentChallenge > challenge.id && (
+        <div>
+          <img
+            src="/images/badge1.png"
+            className="img"
+            alt="challenge picture"
+          />
+        </div>
+      )}
+
       <style jsx>{`
         .item-container {
           width: 80%;
@@ -44,7 +68,7 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
 
         .img {
           margin-top: -2rem;
-          width: 50px;
+          width: 60px;
           margin-bottom: 0.6rem;
         }
 
@@ -109,7 +133,7 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
           }
           .img {
             margin-top: 0;
-            width: 90px;
+            width: 115px;
           }
           .challenge-info {
             margin-right: auto;
@@ -131,6 +155,12 @@ const ChallengeItem = ({ challenge, challengeName, challengeDescription }) => {
           }
           .tag {
             font-size: 1rem;
+          }
+
+          .fade {
+            background-color: #ebebeb;
+            pointer-events: none; //This makes it not clickable
+            opacity: 0.6; //This grays it out to look disabled
           }
         }
       `}</style>

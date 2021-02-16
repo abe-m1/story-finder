@@ -14,13 +14,22 @@ const Challenges = () => {
   }
   return (
     <Layout>
+      {user.nextChallengeIndex}
       <div className="container">
         {challenges.map((challenge, i) => {
-          if (i <= user.nextChallengeIndex) {
+          if (challenge.id <= user.nextChallengeIndex) {
             // return <p>{challenge.challengeName}</p>;
-            return <ChallengeItem challenge={challenge} />;
+            return (
+              <ChallengeItem
+                challenge={challenge}
+                completed={true}
+                currentChallenge={user.nextChallengeIndex}
+              />
+            );
+          } else {
+            return <ChallengeItem challenge={challenge} completed={false} />;
           }
-          return <ChallengeItem challenge={challenge} />;
+
           // return <p>{challenge.challengeName}*</p>;
         })}
       </div>

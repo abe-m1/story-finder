@@ -58,31 +58,6 @@ const Post = () => {
               <button onClick={() => setAddConnection(true)}>
                 Complete Challenge
               </button>
-              {/* <div className="info-box__img-circle">
-                <img src="images/avatar-michelle.jpg" alt="" />
-              </div> */}
-              {/* <div className="info-box__info-name">
-                <p className="name">Michelle Appleton</p>
-                <p className="date">28 Jun 2020</p>
-              </div> */}
-              {/* <div className="info-box__share" id="shareButton">
-                <img
-                  className="info-box__share-icon"
-                  src="images/icon-share.svg"
-                  alt=""
-                />
-              </div> */}
-              {/* <div className="bubble-container">
-                <div className="bubble">
-                  <div className="bubble-content">
-                    <span>SHARE</span>
-                    <img src="images/icon-facebook.svg" />
-                    <img src="images/icon-twitter.svg" />
-                    <img src="images/icon-pinterest.svg" />
-                  </div>
-                </div>
-                <div className="pointer"></div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -107,7 +82,7 @@ const Post = () => {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+
             margin: 0;
           }
 
@@ -151,85 +126,6 @@ const Post = () => {
             align-items: center;
             position: relative;
           }
-          .info-box__img-circle img {
-            height: 45px;
-            border-radius: 50%;
-          }
-          .info-box__info-name {
-            margin-right: auto;
-            margin-left: 10px;
-          }
-          .info-box__share {
-            background: #ecf2f8;
-            height: 15px;
-            width: 15px;
-            border-radius: 50%;
-            padding: 7px;
-          }
-          .info-box__share-icon {
-            z-index: 10;
-          }
-
-          .name {
-            font-weight: 700;
-            margin-bottom: 2px;
-          }
-
-          .date {
-            margin-top: 2px;
-          }
-
-          .bubble-container {
-            display: none;
-            position: absolute;
-            bottom: 60px;
-            right: -100px;
-          }
-
-          .bubble {
-            min-width: 200px;
-            background: #48556a;
-            display: block;
-            margin: 0 auto;
-            border-radius: 15px;
-            margin-top: 50px;
-            padding: 20px;
-            text-align: center;
-          }
-
-          .pointer {
-            height: 25px;
-            width: 25px;
-            background: #48556a;
-            margin: 0 auto;
-            transform: rotate(45deg);
-            border-radius: 0 0 0px 0;
-            margin-top: -13px;
-            position: relative;
-            left: calc(0.5vw);
-          }
-
-          .bubble-content {
-            display: flex;
-            justify-content: space-around;
-          }
-
-          .bubble-content span {
-            letter-spacing: 4px;
-          }
-
-          .attribution {
-            font-size: 11px;
-            text-align: center;
-          }
-
-          .attribution a {
-            color: #3e52a3;
-          }
-
-          .show {
-            display: block;
-          }
 
           @media only screen and (max-width: 768px) {
             .container {
@@ -252,32 +148,6 @@ const Post = () => {
             }
             .container__text-container p {
               font-size: 12px;
-            }
-            .pointer {
-              display: none;
-            }
-            .bubble-container {
-              position: absolute;
-              top: -60px;
-              left: -52px;
-            }
-            .bubble {
-              height: 80px;
-              min-width: 410px;
-              background: #48556a;
-              padding: 15px;
-              text-align: center;
-              border-top-left-radius: 0;
-              border-top-right-radius: 0;
-            }
-            .img-circle img {
-              height: 45px;
-            }
-            .bubble-content {
-              justify-content: space-evenly;
-            }
-            .attribution {
-              display: none;
             }
           }
         `}

@@ -48,6 +48,7 @@ export default async function handler(req, res) {
         }
 
         const newData = {
+          $inc: { nextChallengeIndex: 1 },
           $push: {
             challenges: {
               position: req.body.position,
