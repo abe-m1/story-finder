@@ -1,15 +1,24 @@
 import { useState, useEffect } from 'react';
-import Router from 'next/router';
-import { useUser } from '../lib/hooks';
 import Layout from '../components/layout';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
+import Link from 'next/link';
 
 const About = () => {
+  const [tab, setTab] = useState(2);
+  const [isOpen, setIsOpen] = useState({});
+  const handleAccordionOpen = (i) => {
+    console.log('fired', i);
+    setIsOpen({
+      ...isOpen,
+      [i]: !isOpen[i],
+    });
+
+    console.log(isOpen[1]);
+  };
+
   return (
     <Layout>
-      <div>
+      <div className="container">
         <section className="hero">
           <div className="hero__right">
             <div className="hero__content">
@@ -19,122 +28,131 @@ const About = () => {
                 Open a new browser tab and see your sites load instantly. Try it
                 for free.
               </p>
-              <button className="button button--blue">Login</button>
-              <button className="button">Sign Up</button>
+              <Link href="/signup">
+                <button
+                  className="button"
+                  type="button"
+                  style={{ margin: 0, marginRight: '1rem' }}
+                >
+                  Signup
+                </button>
+              </Link>
             </div>
           </div>
           <div className="hero__left">
-            <img className="hero__image" src="./images/badge-1_03.png" alt="" />
+            <img className="hero__image" src="./illustration-hero.svg" alt="" />
           </div>
-          {/* <div className="blue-pattern"></div> */}
         </section>
 
         <section className="inter">
-          <h2 className="inter__headline">Features</h2>
+          <h2 className="inter__headline">How it works</h2>
           <p className="inter__text">
-            Our aim is to make it quick and easy for you to access your
-            favourite websites. Your bookmarks sync between your devices so you
-            can access them on the go.
+            Undertake a series of challenges that involve .
           </p>
         </section>
         <section className="tabs">
           <div className="container">
-            <div id="tab-1" className="tab-item tab-border">
-              <p className="high-sm">Simple Bookmarking</p>
+            <div
+              onClick={() => setTab(1)}
+              id="tab-1"
+              className={`tab-item ${tab === 1 ? 'tab-border' : ''}`}
+            >
+              <p className="high-sm">Photo Challenge</p>
             </div>
-            <div id="tab-2" className="tab-item">
-              <p className="high-sm">Speedy Searching</p>
+            <div
+              onClick={() => setTab(2)}
+              id="tab-2"
+              className={`tab-item ${tab === 2 ? 'tab-border' : ''}`}
+            >
+              <p className="high-sm">Written Challenge</p>
             </div>
-            <div id="tab-3" className="tab-item">
-              <p className="high-sm">Easy Sharing</p>
+            <div
+              onClick={() => setTab(3)}
+              id="tab-3"
+              className={`tab-item ${tab === 3 ? 'tab-border' : ''}`}
+            >
+              <p className="high-sm">Video Challenge</p>
             </div>
           </div>
         </section>
 
         <section className="tab-content">
           <div className="container">
-            <div id="tab-1-content" className="tab-content-item show">
-              <div className="tab-content-inner">
-                <div className="tab-left">
-                  <img
-                    className="tab-image"
-                    src="./images/badge-1_03.png"
-                    alt=""
-                  />
-                  <div className="blue-pattern-tab"></div>
-                </div>
-                <div className="tab-right">
-                  <div className="tab-right-content">
-                    <h2>Bookmark in one click</h2>
-                    <p>
-                      Organize your bookmarks however you like. Our simple
-                      drag-and-drop interface gives you complete control over
-                      how you manage your favourite sites.
-                    </p>
-                    <button className="button button--blue mobile-hide">
-                      More Info
-                    </button>
+            {tab === 1 && (
+              <div
+                id="tab-1-content"
+                className={`tab-content-item ${tab === 1 ? 'show' : ''}`}
+              >
+                <div className="tab-content-inner">
+                  <div className="tab-left">
+                    <img className="tab-image" src="/camera.png" alt="" />
+                  </div>
+                  <div className="tab-right">
+                    <div className="tab-right-content">
+                      <h2>Photo Challenge</h2>
+                      <p>
+                        Organize your bookmarks however you like. Our simple
+                        drag-and-drop interface gives you complete control over
+                        how you manage your favourite sites.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div id="tab-2-content" className="tab-content-item">
-              <div className="tab-content-inner">
-                <div className="tab-left">
-                  <img
-                    className="tab-image-small"
-                    src="./images/badge-1_03.png"
-                    alt=""
-                  />
-                  <div className="blue-pattern-tab"></div>
-                </div>
-                <div className="tab-right">
-                  <div className="tab-right-content">
-                    <h2>Intelligent search</h2>
-                    <p>
-                      Our powerful search feature will help you find saved sites
-                      in no time at all. No need to trawl through all of your
-                      bookmarks.
-                    </p>
-                    <button className="button button--blue mobile-hide">
-                      More Info
-                    </button>
+            )}
+            {tab === 2 && (
+              <div
+                id="tab-2-content"
+                className={`tab-content-item ${tab === 2 ? 'show' : ''}`}
+              >
+                <div className="tab-content-inner">
+                  <div className="tab-left">
+                    <img
+                      className="tab-image-small"
+                      src="./typewritter.png"
+                      alt=""
+                    />
+                  </div>
+                  <div className="tab-right">
+                    <div className="tab-right-content">
+                      <h2>Written Challenge</h2>
+                      <p>
+                        Our powerful search feature will help you find saved
+                        sites in no time at all. No need to trawl through all of
+                        your bookmarks.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div id="tab-3-content" className="tab-content-item">
-              <div className="tab-content-inner-small">
-                <div className="tab-left">
-                  <img
-                    className="tab-image-small"
-                    src="./images/badge-1_03.png"
-                    alt=""
-                  />
-                  <div className="blue-pattern-tab"></div>
-                </div>
-                <div className="tab-right">
-                  <div className="tab-right-content">
-                    <h2>Share your bookmarks</h2>
-                    <p>
-                      Easily share your bookmarks and collections with others.
-                      Create a shareable link that you can send at the click of
-                      a button.
-                    </p>
-                    <button className="button button--blue mobile-hide">
-                      More Info
-                    </button>
+            )}
+            {tab === 3 && (
+              <div
+                id="tab-3-content"
+                className={`tab-content-item ${tab === 3 ? 'show' : ''}`}
+              >
+                <div className="tab-content-inner-small">
+                  <div className="tab-left">
+                    <img className="tab-image-small" src="./film.png" alt="" />
+                  </div>
+                  <div className="tab-right">
+                    <div className="tab-right-content">
+                      <h2>Video Challenge</h2>
+                      <p>
+                        Easily share your bookmarks and collections with others.
+                        Create a shareable link that you can send at the click
+                        of a button.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
 
         <section className="inter extra-margin-6">
-          <h2 className="inter__headline">Download the extension</h2>
+          <h2 className="inter__headline">New Features Added</h2>
           <p className="inter__text">
             We’ve got more browsers in the pipeline. Please do let us know if
             you’ve got a favourite you’d like us to prioritize.
@@ -142,31 +160,31 @@ const About = () => {
         </section>
         <section className="row">
           <div className="box">
-            <img className="box__logo" src="./images/badge-1_03.png" alt="" />
-            <h2 className="box__headline">Add to Chrome</h2>
-            <p className="box__text">Minimum version 62</p>
-            <button className="button button--blue mobile-button">
-              Add & Install Extension
-            </button>
+            <img className="box__logo" src="/map.png" alt="" />
+            <h2 className="box__headline">Map View</h2>
+            <p className="box__text">See your connections on the map</p>
           </div>
           <div className="box">
-            <img className="box__logo" src="./images/badge-1_03.png" alt="" />
-            <h2 className="box__headline">Add to Firefox</h2>
-            <p className="box__text">Minimum version 55</p>
-            <button className="button button--blue mobile-button">
-              Add & Install Extension
-            </button>
+            <img className="box__logo" src="/badge.png" alt="" />
+            <h2 className="box__headline">Earn Badges</h2>
+            <p className="box__text">
+              Earn a badge after completing challenges
+            </p>
           </div>
           <div className="box">
-            <img className="box__logo" src="./images/badge-1_03.png" alt="" />
-            <h2 className="box__headline">Add to Opera</h2>
-            <p className="box__text">Minimum version 46</p>
-            <button className="button button--blue mobile-button">
-              Add & Install Extension
-            </button>
+            <img className="box__logo" src="/friend.png" alt="" />
+            <h2 className="box__headline">Invite Friends</h2>
+            <p className="box__text">
+              Share your achievements with your network
+            </p>
           </div>
         </section>
-
+        {/* <a href="https://www.vecteezy.com/free-vector/hand">Hand Vectors by Vecteezy</a> */}
+        {/* <a href="https://www.vecteezy.com/free-vector/typewriter">Typewriter Vectors by Vecteezy</a> */}
+        {/* <a href="https://www.vecteezy.com/free-vector/media">Media Vectors by Vecteezy</a> */}
+        {/* <a href="https://www.vecteezy.com/free-vector/camera">Camera Vectors by Vecteezy</a> */}
+        {/* <a href="https://www.vecteezy.com/free-vector/vintage-book">Vintage Book Vectors by Vecteezy</a> */}
+        {/* <a href="https://www.vecteezy.com/free-vector/web">Web Vectors by Vecteezy</a> */}
         <section className="inter">
           <h2 className="inter__headline font-split">
             Frequently Asked Questions
@@ -178,8 +196,8 @@ const About = () => {
         </section>
 
         <section className="accordion-container">
-          <button className="accordion">
-            What is Bookmark?
+          <button className="accordion" onClick={() => handleAccordionOpen(1)}>
+            What is StoryTime?
             <div className="arrow-container">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
                 <path
@@ -192,16 +210,18 @@ const About = () => {
               </svg>
             </div>
           </button>
-          <div className="panel">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-              tincidunt justo eget ultricies fringilla. Phasellus blandit ipsum
-              quis quam ornare mattis.
-            </p>
-          </div>
+          {isOpen[1] && (
+            <div className="panel">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+                tincidunt justo eget ultricies fringilla. Phasellus blandit
+                ipsum quis quam ornare mattis.
+              </p>
+            </div>
+          )}
 
-          <button className="accordion">
-            How can I request a new browser?
+          <button className="accordion" onClick={() => handleAccordionOpen(2)}>
+            Who is it for?
             <div className="arrow-container">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
                 <path
@@ -214,18 +234,20 @@ const About = () => {
               </svg>
             </div>
           </button>
-          <div className="panel">
-            <p>
-              Vivamus luctus eros aliquet convallis ultricies. Mauris augue
-              massa, ultricies non ligula. Suspendisse imperdiet. Vivamus luctus
-              eros aliquet convallis ultricies. Mauris augue massa, ultricies
-              non ligula. Suspendisse imperdie tVivamus luctus eros aliquet
-              convallis ultricies. Mauris augue massa, ultricies non ligula.
-              Suspendisse imperdiet.
-            </p>
-          </div>
+          {isOpen[2] && (
+            <div className="panel">
+              <p>
+                Vivamus luctus eros aliquet convallis ultricies. Mauris augue
+                massa, ultricies non ligula. Suspendisse imperdiet. Vivamus
+                luctus eros aliquet convallis ultricies. Mauris augue massa,
+                ultricies non ligula. Suspendisse imperdie tVivamus luctus eros
+                aliquet convallis ultricies. Mauris augue massa, ultricies non
+                ligula. Suspendisse imperdiet.
+              </p>
+            </div>
+          )}
 
-          <button className="accordion">
+          <button className="accordion" onClick={() => handleAccordionOpen(3)}>
             Is there a mobile app?
             <div className="arrow-container arrow-container-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
@@ -239,17 +261,19 @@ const About = () => {
               </svg>
             </div>
           </button>
-          <div className="panel">
-            <p>
-              Sed consectetur quam id neque fermentum accumsan. Praesent luctus
-              vestibulum dolor, ut condimentum urna vulputate eget. Cras in
-              ligula quis est pharetra mattis sit amet pharetra purus. Sed
-              sollicitudin ex et ultricies bibendum.
-            </p>
-          </div>
+          {isOpen[3] && (
+            <div className="panel">
+              <p>
+                Sed consectetur quam id neque fermentum accumsan. Praesent
+                luctus vestibulum dolor, ut condimentum urna vulputate eget.
+                Cras in ligula quis est pharetra mattis sit amet pharetra purus.
+                Sed sollicitudin ex et ultricies bibendum.
+              </p>
+            </div>
+          )}
 
-          <button className="accordion">
-            What about other Chromium browsers?
+          <button className="accordion" onClick={() => handleAccordionOpen(4)}>
+            What is the story behind it?
             <div className="arrow-container">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12">
                 <path
@@ -262,23 +286,23 @@ const About = () => {
               </svg>
             </div>
           </button>
-          <div className="panel">
-            <p>
-              Integer condimentum ipsum id imperdiet finibus. Vivamus in
-              placerat mi, at euismod dui. Aliquam vitae neque eget nisl gravida
-              pellentesque non ut velit.
-            </p>
-          </div>
+          {isOpen[4] && (
+            <div className="panel">
+              <p>
+                Integer condimentum ipsum id imperdiet finibus. Vivamus in
+                placerat mi, at euismod dui. Aliquam vitae neque eget nisl
+                gravida pellentesque non ut velit.
+              </p>
+            </div>
+          )}
           <div className="more-info">
-            <button className="button button--blue">More Info</button>
+            <button className="button button--blue">Signup</button>
           </div>
         </section>
         <section className="action">
           <div className="action__box">
-            <p className="action__text">35,000+ already joined</p>
-            <h2 className="action__headline">
-              Stay up-to-date with what we’re doing
-            </h2>
+            <p className="action__text">Take the challenge today</p>
+            <h2 className="action__headline">Register and be inspired</h2>
             <form id="form">
               <div className="input-container">
                 <input
@@ -305,11 +329,10 @@ const About = () => {
 
         <div className="footer-container">
           <footer className="footer">
-            <img className="footer-logo" src="./images/badge-1_03.png" alt="" />
+            <img className="footer-logo" src="./logo.png" alt="" />
             <ul className="footer-items">
               <li>Contact Us</li>
               <li>Features</li>
-              <li>Pricing</li>
               <li>Contact</li>
             </ul>
           </footer>
@@ -392,10 +415,10 @@ const About = () => {
           margin-right: 4rem;
         }
         .header__menu__menu-item:not(:last-child):hover {
-          color: #fa5757;
+          color: #3f51b5;
         }
         .header__menu__menu-item:last-child {
-          background-color: #fa5757;
+          background-color: #3f51b5;
           padding: 1.1rem 3.8rem;
           border-radius: 5px;
           color: #fff;
@@ -403,8 +426,8 @@ const About = () => {
         }
         .header__menu__menu-item:last-child:hover {
           background-color: #fff;
-          border: 1px solid #fa5757;
-          color: #fa5757;
+          border: 1px solid #3f51b5;
+          color: #3f51b5;
         }
         @media (max-width: 600px) {
           .header__menu__menu-item {
@@ -429,7 +452,7 @@ const About = () => {
           display: flex;
           width: 76%;
           margin: auto;
-          margin-bottom: 12rem;
+          margin-bottom: 6rem;
           position: relative;
           margin-top: 2rem;
         }
@@ -495,73 +518,9 @@ const About = () => {
           }
         }
 
-        .blue-pattern {
-          height: 35rem;
-          width: 45%;
-          background-color: #5368df;
-          z-index: -1;
-          right: -17rem;
-          bottom: -39px;
-          position: absolute;
-          border-top-left-radius: 150px;
-          border-bottom-left-radius: 150px;
-        }
-        @media (max-width: 600px) {
-          .blue-pattern {
-            right: -2rem;
-            top: 59px;
-            height: 21rem;
-          }
-        }
-
-        .button {
-          border: none;
-          padding: 1.6rem 3rem;
-          border-radius: 10px;
-          border: 1px solid transparent;
-        }
-        .button:not(:last-of-type) {
-          margin-right: 1.5rem;
-        }
-        .button:hover {
-          background-color: #fff;
-          color: #9194a1;
-          border: 1px solid #9194a1;
-        }
-        @media (max-width: 600px) {
-          .button {
-            padding: 1.6rem 2rem;
-          }
-        }
-        .button--blue {
-          background-color: #5368df;
-          color: #fff;
-        }
-        .button--blue:hover {
-          background-color: #fff;
-          color: #5368df;
-          border: 1px solid #5368df;
-        }
-        .button--red {
-          background-color: #fa5757;
-          color: #fff;
-        }
-        .button--red:hover {
-          background-color: #fff;
-          color: #fa5757;
-          border: 1px solid #fa5757;
-        }
-
-        @media (max-width: 600px) {
-          .mobile-button {
-            width: 100%;
-          }
-        }
-
         .inter {
           width: 35%;
           margin: auto;
-          margin-bottom: 4rem;
           text-align: center;
         }
         @media (max-width: 600px) {
@@ -598,7 +557,7 @@ const About = () => {
           padding-top: 1rem;
           border-bottom: 1px solid #9194a1;
           border-right: none;
-          margin-bottom: 3rem;
+          // margin-bottom: 3rem;
         }
         @media (max-width: 600px) {
           .tabs {
@@ -625,7 +584,7 @@ const About = () => {
           padding: 2rem;
         }
         .tab-item:hover {
-          color: #fa5757;
+          color: #3f51b5;
         }
         @media (max-width: 600px) {
           .tab-item {
@@ -637,7 +596,7 @@ const About = () => {
         }
 
         .tab-border {
-          border-bottom: #fa5757 3px solid;
+          border-bottom: #3f51b5 3px solid;
           position: relative;
         }
         @media (max-width: 600px) {
@@ -680,7 +639,7 @@ const About = () => {
           display: flex;
           width: 80%;
           margin: auto;
-          margin-bottom: 23rem;
+          margin-bottom: 8rem;
         }
         @media (max-width: 600px) {
           .tab-content-inner {
@@ -693,7 +652,7 @@ const About = () => {
           display: flex;
           width: 70%;
           margin: auto;
-          margin-bottom: 17rem;
+          margin-bottom: 11rem;
         }
         @media (max-width: 600px) {
           .tab-content-inner-small {
@@ -774,29 +733,10 @@ const About = () => {
           width: 100%;
         }
 
-        .blue-pattern-tab {
-          height: 30rem;
-          width: 111%;
-          background-color: #5368df;
-          z-index: -1;
-          left: -23rem;
-          bottom: -66px;
-          position: absolute;
-          border-top-right-radius: 100px;
-          border-bottom-right-radius: 100px;
-        }
-        @media (max-width: 600px) {
-          .blue-pattern-tab {
-            height: 22rem;
-            left: -6rem;
-            bottom: -33px;
-          }
-        }
-
         .row {
           display: flex;
           justify-content: center;
-          margin-bottom: 19rem;
+          margin-bottom: 17rem;
         }
         @media (max-width: 600px) {
           .row {
@@ -808,19 +748,20 @@ const About = () => {
         .box {
           box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
           border-radius: 10px;
-          padding: 4rem 4rem;
+          padding: 2.4rem 4rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           background: url(/images/bg-dots.svg) no-repeat 10% 66%;
+          width: 27%;
         }
         .box__logo {
-          width: 9rem;
-          margin-bottom: 3rem;
+          width: 16rem;
+          margin-bottom: 2rem;
         }
         @media (max-width: 600px) {
           .box__logo {
-            width: 11rem;
+            width: 20rem;
             margin-bottom: 2rem;
           }
         }
@@ -830,11 +771,11 @@ const About = () => {
         }
         .box__text {
           color: #9194a1;
-          margin-bottom: 5rem;
+          margin-bottom: 1rem;
         }
         @media (max-width: 600px) {
           .box__text {
-            margin-bottom: 7rem;
+            margin-bottom: 1.5rem;
           }
         }
         .box:not(:last-of-type) {
@@ -887,9 +828,9 @@ const About = () => {
         }
 
         .more-info {
-          margin-top: 9rem;
+          margin-top: 3rem;
           text-align: center;
-          margin-bottom: 14rem;
+          margin-bottom: 7rem;
         }
         @media (max-width: 600px) {
           .more-info {
@@ -903,7 +844,7 @@ const About = () => {
 
         .active,
         .accordion:hover {
-          color: #fa5757;
+          color: #3f51b5;
         }
 
         .accordian-active {
@@ -912,7 +853,7 @@ const About = () => {
 
         .panel {
           padding: 0 18px;
-          display: none;
+          // display: none;
           background-color: white;
           overflow: hidden;
         }
@@ -933,7 +874,7 @@ const About = () => {
           }
         }
         .action__box {
-          width: 37%;
+          width: 65%;
           margin: auto;
         }
         @media (max-width: 600px) {
@@ -982,7 +923,7 @@ const About = () => {
           width: 100%;
           padding: 2rem;
           border-radius: 10px;
-          margin-bottom: 4rem;
+          // margin-bottom: 4rem;
         }
         @media (max-width: 600px) {
           #input {
@@ -1046,12 +987,12 @@ const About = () => {
         }
 
         .form-error {
-          border: 2px solid #fa5757 !important;
+          border: 2px solid #3f51b5 !important;
         }
 
         .box-error {
           padding-bottom: 1rem;
-          background-color: #fa5757;
+          background-color: #3f51b5;
           border-radius: 10px;
         }
         @media (max-width: 600px) {
@@ -1095,7 +1036,7 @@ const About = () => {
           margin-left: 2rem;
         }
         .footer-items li:hover {
-          color: #fa5757;
+          color: #3f51b5;
         }
         @media (max-width: 600px) {
           .footer-items li {
@@ -1133,7 +1074,7 @@ const About = () => {
           margin-left: 1.5rem;
         }
         ion-icon:hover {
-          color: #fa5757;
+          color: #3f51b5;
         }
         @media (max-width: 600px) {
           ion-icon {
@@ -1208,6 +1149,25 @@ const About = () => {
 
         .attribution a {
           color: #3e52a3;
+        }
+
+        .container {
+          padding-top: 3rem;
+        }
+
+        .button {
+          position: relative;
+          background: #3f51b5;
+          border: 1px solid #3f51b5;
+          font-size: 1.1rem;
+          color: #fff;
+          margin: 3rem 0;
+          padding: 0.75rem 3rem;
+          cursor: pointer;
+          transition: background-color 0.28s ease, color 0.28s ease,
+            box-shadow 0.28s ease;
+          overflow: hidden;
+          box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
         }
       `}</style>
     </Layout>
