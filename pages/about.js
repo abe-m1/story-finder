@@ -22,7 +22,7 @@ const About = () => {
         <section className="hero">
           <div className="hero__right">
             <div className="hero__content">
-              <h1 className="hero__headline">A Way to share your storiesr</h1>
+              <h1 className="hero__headline">A Way to share your stories</h1>
               <p className="hero__headline-text">
                 A clean and simple interface to organize your favourite stories.
                 Open a new browser tab and see your sites load instantly. Try it
