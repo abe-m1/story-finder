@@ -56,7 +56,11 @@ const Profile = () => {
         .header {
           min-height: 60vh;
           background: #009fff;
-          background: linear-gradient(to right, #ec2f4b, #009fff),
+          background: linear-gradient(
+              to right,
+              rgba(255, 0, 0, 0),
+              rgba(255, 0, 0, 1)
+            ),
             url('/bg-pattern4.jpg');
           color: white;
           clip-path: ellipse(100vw 60vh at 50% 50%);

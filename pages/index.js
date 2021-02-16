@@ -22,7 +22,7 @@ const Home = () => {
       <div className="container">
         {!user && (
           <div className="back">
-            <div className="hero">
+            {/* <div className="hero">
               <img className="main-image" src="./main-name.png"></img>
               <p className="slogan">
                 Discover stories and experiences and be inspired by them
@@ -33,7 +33,43 @@ const Home = () => {
               <Link href="/login">
                 <button className="login">Login</button>
               </Link>
-            </div>
+            </div> */}
+            <section className="container__main-content">
+              <div className="mockups">
+                <img src="/illustration-mockups.svg" alt="" />
+              </div>
+              <div className="description">
+                <h2 className="description__main-heading">
+                  Get inspired by your
+                </h2>
+                <h2 className="description__main-heading">family stories</h2>
+                <p className="description__main-text">
+                  Discover stories and experiences of those closest to you and
+                  be inspired by them to be a force of good in the world.
+                </p>
+                <div className="description__button-container">
+                  {/* <button className="button">Register</button> */}
+                  <Link href="/signup">
+                    <button
+                      className="button"
+                      type="button"
+                      style={{ margin: 0, marginRight: '1rem' }}
+                    >
+                      Signup
+                    </button>
+                  </Link>
+                  <Link href="/about">
+                    <button
+                      className="more-button"
+                      type="button"
+                      style={{ margin: 0 }}
+                    >
+                      Learn More
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </section>
           </div>
         )}
 
@@ -148,9 +184,16 @@ const Home = () => {
           }
           .back {
             padding: 3rem;
-            background: url('./bg-pattern1b.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
+            // background: url('./bg-pattern4a.jpg');
+            background: linear-gradient(
+                to right,
+                rgba(207, 248, 234, 0.7),
+                rgba(123, 132, 193, 1)
+              ),
+              url('/bg-pattern4.jpg');
+            // rgba(154, 162, 214, 1)
+            // background-size: cover;
+            // background-repeat: no-repeat;
             height: 100%;
           }
           .hero {
@@ -351,6 +394,115 @@ const Home = () => {
               justify-content: center;
               align-items: center;
             }
+          }
+
+          // .button {
+          //   padding: 1.5rem 7rem;
+          //   border-radius: 50px;
+          //   border-style: none;
+          //   font-size: 2rem;
+          //   color: #674baf;
+          //   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+          // }
+          // @media (max-width: 600px) {
+          //   .button {
+          //     font-size: 1.7rem;
+          //     padding: 1.6rem 5.5rem;
+          //     margin-bottom: 2rem;
+          //   }
+          // }
+
+          .button {
+            position: relative;
+            background: #3f51b5;
+            border: 1px solid #3f51b5;
+            font-size: 1.1rem;
+            color: #fff;
+            margin: 3rem 0;
+            padding: 0.75rem 3rem;
+            cursor: pointer;
+            transition: background-color 0.28s ease, color 0.28s ease,
+              box-shadow 0.28s ease;
+            overflow: hidden;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+          }
+
+          .more-button {
+            position: relative;
+            background: #f97474;
+            border: none;
+            font-size: 1.1rem;
+            color: #fff;
+            margin: 3rem 0;
+            padding: 0.75rem 3rem;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+          }
+
+          .mockups {
+            flex: 40%;
+          }
+
+          .description {
+            flex: 60%;
+            padding: 5rem 4rem;
+          }
+          @media (max-width: 600px) {
+            .description {
+              padding: 2rem;
+              font-size: 2rem;
+              flex: none;
+            }
+          }
+          .description__main-heading {
+            font-family: 'Popins', sans-serif;
+            font-size: 3.2rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 1rem;
+          }
+          .description__main-heading:last-of-type {
+            margin-top: 1rem;
+            margin-bottom: 3rem;
+          }
+          @media (max-width: 600px) {
+            .description__main-heading {
+              font-size: 2.8rem;
+              text-align: center;
+            }
+          }
+          .description__main-text {
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+          }
+          @media (max-width: 600px) {
+            .description__main-text {
+              font-size: 1.6rem;
+              font-weight: 200;
+              text-align: center;
+            }
+          }
+          @media (max-width: 600px) {
+            .description__button-container {
+              text-align: center;
+            }
+          }
+
+          .container__main-content {
+            display: flex;
+            align-items: center;
+            font-size: 2.1rem;
+            color: #fff;
+            font-weight: 200;
+          }
+          @media (max-width: 600px) {
+            .container__main-content {
+              display: block;
+            }
+          }
+          .mockups img {
+            width: 100%;
           }
         `}</style>
       </div>
