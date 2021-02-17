@@ -86,7 +86,7 @@ const Home = () => {
                   </div>
                   <Link href="/challenges">
                     <button
-                      className="button"
+                      className="small-button-red"
                       type="button"
                       style={{ margin: 0, marginLeft: 'auto' }}
                     >
@@ -129,11 +129,18 @@ const Home = () => {
 
               <div className="testimonial-container container--three">
                 <h2 className="dark-headline">Add Connection</h2>
-                {/* <p className="testimonial-dark">
-                  “ Thank you for the wonderful experience! I now have a job I
-                  really enjoy,
-                </p> */}
-                <a onClick={() => setAddConnection(true)}>Add a connection</a>
+                <p
+                  className="testimonial-dark"
+                  style={{ marginBottom: '2rem' }}
+                >
+                  Add more connections and expand your network
+                </p>
+                <a
+                  className="add-connection"
+                  onClick={() => setAddConnection(true)}
+                >
+                  Add a connection
+                </a>
                 <ConnectionDialog
                   userId={user._id}
                   onSuccessSubmit={onSuccessSubmit}
@@ -151,7 +158,7 @@ const Home = () => {
                   </div>
                   <Link href="/challenges">
                     <button
-                      className="button"
+                      className="small-button-blue"
                       type="button"
                       style={{ margin: 0, marginLeft: 'auto' }}
                     >
@@ -395,6 +402,7 @@ const Home = () => {
           }
 
           .main-body {
+            height: 100%;
             font-size: 50%;
             // font-family: "Barlow Semi Condensed", sans-serif;
             // font-size: 1.3rem;
@@ -449,6 +457,34 @@ const Home = () => {
             color: #fff;
             margin: 3rem 0;
             padding: 0.75rem 3rem;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+          }
+
+          .small-button-red {
+            position: relative;
+            background: #f97474;
+            border: none;
+            font-size: 1rem;
+            color: #fff;
+            border-radius: 6px;
+            margin: 2rem 0;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+          }
+
+          .small-button-blue {
+            position: relative;
+            background: #448aff;
+            border: none;
+            font-size: 1rem;
+            color: #fff;
+            border-radius: 6px;
+            margin: 2rem 0;
+            padding: 0.5rem 1rem;
             cursor: pointer;
             overflow: hidden;
             box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
@@ -520,7 +556,14 @@ const Home = () => {
           }
           .latest {
             margin-bottom: 2rem;
-            font-size: 14px;
+            font-size: 20px;
+          }
+          .add-connection {
+            border: 1px solid #48556a;
+            color: #48556a;
+            padding: 0.5rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
           }
         `}</style>
       </div>

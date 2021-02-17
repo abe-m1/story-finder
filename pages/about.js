@@ -22,11 +22,13 @@ const About = () => {
         <section className="hero">
           <div className="hero__right">
             <div className="hero__content">
-              <h1 className="hero__headline">A Way to share your stories</h1>
+              <h1 className="hero__headline">
+                A Way to discover meaningful stories
+              </h1>
               <p className="hero__headline-text">
-                A clean and simple interface to organize your favourite stories.
-                Open a new browser tab and see your sites load instantly. Try it
-                for free.
+                Undertake a set of challenge that will make you ask impactful
+                questions of your relatives and discover and be inspired by
+                their experiences.
               </p>
               <Link href="/signup">
                 <button
@@ -47,7 +49,8 @@ const About = () => {
         <section className="inter">
           <h2 className="inter__headline">How it works</h2>
           <p className="inter__text">
-            Undertake a series of challenges that involve .
+            Move through a set of fun and challenging questions that will take
+            you both back and forward in order to inspire you in the present.
           </p>
         </section>
         <section className="tabs">
@@ -91,9 +94,8 @@ const About = () => {
                     <div className="tab-right-content">
                       <h2>Photo Challenge</h2>
                       <p>
-                        Organize your bookmarks however you like. Our simple
-                        drag-and-drop interface gives you complete control over
-                        how you manage your favourite sites.
+                        Complete the challenges by uploading your connections
+                        images of meaningful objects and inspired travel photos.
                       </p>
                     </div>
                   </div>
@@ -117,9 +119,9 @@ const About = () => {
                     <div className="tab-right-content">
                       <h2>Written Challenge</h2>
                       <p>
-                        Our powerful search feature will help you find saved
-                        sites in no time at all. No need to trawl through all of
-                        your bookmarks.
+                        Complete the challenges by uploading your connections
+                        thoughts and advice of the lessons they have learned in
+                        their lives.
                       </p>
                     </div>
                   </div>
@@ -139,9 +141,8 @@ const About = () => {
                     <div className="tab-right-content">
                       <h2>Video Challenge</h2>
                       <p>
-                        Easily share your bookmarks and collections with others.
-                        Create a shareable link that you can send at the click
-                        of a button.
+                        Complete the challenges by uploading your short video
+                        clips of their best life advice they can impart to you.
                       </p>
                     </div>
                   </div>
@@ -154,8 +155,9 @@ const About = () => {
         <section className="inter extra-margin-6">
           <h2 className="inter__headline">New Features Added</h2>
           <p className="inter__text">
-            We’ve got more browsers in the pipeline. Please do let us know if
-            you’ve got a favourite you’d like us to prioritize.
+            You won't just accumulate information, but will be given challenges
+            that will make you sort and ponder it in new ways, which will
+            hopefully inspire you in your own lives.
           </p>
         </section>
         <section className="row">
@@ -480,7 +482,7 @@ const About = () => {
           }
         }
         .hero__headline {
-          font-size: 4.5rem;
+          font-size: 3.5rem;
           margin-bottom: 2rem;
           font-weight: 500;
         }

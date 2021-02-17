@@ -14,7 +14,7 @@ const Layout = (props) => (
     <Header />
 
     <main>
-      <div className="container" style={{ height: '95vh' }}>
+      <div className="container" style={{ height: '94vh' }}>
         {props.children}
       </div>
     </main>
