@@ -47,33 +47,55 @@ export default async function handler(req, res) {
           imageUrl = saveToCloud.secure_url;
         }
 
-        const newData = {
-          $inc: { nextChallengeIndex: 1 },
-          $push: {
-            challenges: {
-              position: req.body.position,
-              // name: req.body.name,
-              challengeImage: imageUrl,
-              challengeType: req.body.connection,
-              challengeType: req.body.challengeType,
-              challengeId: req.body.challengeId,
-              challengeName: req.body.challengeName,
-              challengeDescription: req.body.challengeDescription,
-              responseDescription: req.body.description,
-              connectionId: req.body.connection,
-              challengeResponse: req.body.challengeResponse,
+        let newData;
+        if (req.body.challengeType === 'image-submit') {
+          newData = {
+            $inc: { nextChallengeIndex: 1 },
+            $push: {
+              challenges: {
+                position: req.body.position,
+                // name: req.body.name,
+                challengeImage: imageUrl,
+                challengeType: req.body.connection,
+                challengeType: req.body.challengeType,
+                challengeId: req.body.challengeId,
+                challengeName: req.body.challengeName,
+                challengeDescription: req.body.challengeDescription,
+                responseDescription: req.body.description,
+                connectionId: req.body.connection,
+                challengeResponse: req.body.challengeResponse,
+              },
+              markers: {
+                position: req.body.position,
+                userId: req.body.userId,
+                userName: req.body.name,
+                connectionType: req.body.connection,
+                userImage: imageUrl,
+                type: 'challenge',
+              },
             },
-            markers: {
-              position: req.body.position,
-              userId: req.body.userId,
-              userName: req.body.name,
-              connectionType: req.body.connection,
-              userImage: imageUrl,
-              type: 'connection',
+          };
+        } else {
+          newData = {
+            $inc: { nextChallengeIndex: 1 },
+            $push: {
+              challenges: {
+                position: req.body.position,
+                // name: req.body.name,
+                challengeImage: imageUrl,
+                challengeType: req.body.connection,
+                challengeType: req.body.challengeType,
+                challengeId: req.body.challengeId,
+                challengeName: req.body.challengeName,
+                challengeDescription: req.body.challengeDescription,
+                responseDescription: req.body.description,
+                connectionId: req.body.connection,
+                challengeResponse: req.body.challengeResponse,
+              },
             },
-          },
-          //
-        };
+            //
+          };
+        }
 
         const user = await User.findByIdAndUpdate(id, newData, {
           new: true,

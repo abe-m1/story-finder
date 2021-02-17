@@ -31,7 +31,15 @@ const Post = () => {
   if (!user || user.isLoggedIn === false) {
     return <Layout>Loading...</Layout>;
   }
-  const imgString = `/challenge-square-${currentChallenge.id}.jpg`;
+  let imgString;
+  if (
+    user.challenges[currentChallenge.id - 1] &&
+    user.challenges[currentChallenge.id - 1].challengeImage
+  ) {
+    imgString = user.challenges[currentChallenge.id - 1].challengeImage;
+  } else {
+    imgString = `/challenge-square-${currentChallenge.id}.jpg`;
+  }
   return (
     <Layout>
       <div className="body">
@@ -57,16 +65,34 @@ const Post = () => {
           ></div>
           <div className="container__text-container">
             <h2>{currentChallenge.challengeName}</h2>
-            <p>{currentChallenge.challengeDescription}</p>
+            {user.challenges[currentChallenge.id - 1] &&
+              currentChallenge.type === 'image-submit' && (
+                <p>
+                  {user.challenges[currentChallenge.id - 1].responseDescription}
+                </p>
+              )}
+
+            {user.challenges[currentChallenge.id - 1] &&
+              currentChallenge.type === 'text-submit' && (
+                <p>
+                  {user.challenges[currentChallenge.id - 1].challengeResponse}
+                </p>
+              )}
+
+            {!user.challenges[currentChallenge.id - 1] && (
+              <p>{currentChallenge.challengeDescription}</p>
+            )}
             <div className="info-box">
-              <button
-                onClick={() => setAddConnection(true)}
-                className="button"
-                type="button"
-                style={{ margin: 0 }}
-              >
-                Complete Challenge
-              </button>
+              {!user.challenges[currentChallenge.id - 1] && (
+                <button
+                  onClick={() => setAddConnection(true)}
+                  className="button"
+                  type="button"
+                  style={{ margin: 0 }}
+                >
+                  Complete Challenge
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -120,6 +146,7 @@ const Post = () => {
             margin: 15px;
           }
           .container__text-container h2 {
+            margin-top: 0;
             font-size: 26px;
             line-height: 1.8;
             color: #48556a;

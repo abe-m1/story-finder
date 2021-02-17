@@ -176,12 +176,15 @@ const Demo = ({
           rotation
         );
       }
-      const geoResult = await opencage.geocode({
-        q: form.location,
-        key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
-        no_annotations: 1,
-        limit: 1,
-      });
+      let geoResult;
+      if (challenge.type === 'image-submit') {
+        geoResult = await opencage.geocode({
+          q: form.location,
+          key: process.env.NEXT_PUBLIC_GEOCODE_KEY,
+          no_annotations: 1,
+          limit: 1,
+        });
+      }
 
       let results = {};
       if (geoResult) {
@@ -343,7 +346,7 @@ const Demo = ({
                 color="primary"
                 classes={{ root: classes.cropButton }}
               >
-                {!loading && 'Add Connection'}
+                {!loading && 'Submit Challenge'}
                 {loading && <CircularProgress color="secondary" />}
               </Button>
             </div>
@@ -353,16 +356,15 @@ const Demo = ({
         {screen === 1 && (
           <div>
             <form>
-              <h1>Submit a new challenge</h1>
+              <h1>{challenge.challengeName}</h1>
               <div className="form-group">
                 <input
                   type="text"
-                  maxLength="20"
                   name="description"
                   onChange={handleChange}
                   required
                   value={form.name}
-                  placeholder="Add your name"
+                  placeholder="Add a description"
                 />
                 <label className="control-label" for="input">
                   Describe what you are submitting?
@@ -372,23 +374,25 @@ const Demo = ({
                   <i className="input-error">Please fill out name</i>
                 )}
               </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="location"
-                  onChange={handleChange}
-                  required
-                  value={form.location}
-                  placeholder="Add your city, country"
-                />
-                <label className="control-label" for="input">
-                  What city do they live in?
-                </label>
-                <i className="bar"></i>
-                {formError.location && (
-                  <i className="input-error">Please fill out location</i>
-                )}
-              </div>
+              {challenge.type === 'image-submit' && (
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="location"
+                    onChange={handleChange}
+                    required
+                    value={form.location}
+                    placeholder="Add your city, country"
+                  />
+                  <label className="control-label" for="input">
+                    What city is the image from?
+                  </label>
+                  <i className="bar"></i>
+                  {formError.location && (
+                    <i className="input-error">Please fill out location</i>
+                  )}
+                </div>
+              )}
               <div className="form-group">
                 <select
                   value={form.connection}
@@ -598,7 +602,7 @@ const Demo = ({
           left: 50%;
           bottom: -0.0625rem;
           position: absolute;
-          background: #ef286b;
+          background: #28bdef;
           transition: left 0.28s ease, width 0.28s ease;
           z-index: 2;
         }
@@ -690,7 +694,7 @@ const Demo = ({
         .form-group select:focus ~ .control-label,
         .form-group input:focus ~ .control-label,
         .form-group textarea:focus ~ .control-label {
-          color: #ef286b;
+          color: #28bdef;
         }
         .form-group select:focus ~ .bar::before,
         .form-group input:focus ~ .bar::before,
@@ -747,17 +751,17 @@ const Demo = ({
         }
         .radio .helper::after {
           transform: scale(0);
-          background-color: #ef286b;
-          border-color: #ef286b;
+          background-color: #28bdef;
+          border-color: #28bdef;
         }
         .radio label:hover .helper {
-          color: #ef286b;
+          color: #28bdef;
         }
         .radio input:checked ~ .helper::after {
           transform: scale(0.5);
         }
         .radio input:checked ~ .helper::before {
-          color: #ef286b;
+          color: #28bdef;
         }
 
         .checkbox {
@@ -781,7 +785,7 @@ const Demo = ({
           position: absolute;
           height: 0;
           width: 0.2rem;
-          background-color: #ef286b;
+          background-color: #28bdef;
           display: block;
           transform-origin: left top;
           border-radius: 0.25rem;
@@ -801,10 +805,10 @@ const Demo = ({
           transform: rotate(-45deg);
         }
         .checkbox label:hover .helper {
-          color: #ef286b;
+          color: #28bdef;
         }
         .checkbox input:checked ~ .helper {
-          color: #ef286b;
+          color: #28bdef;
         }
         .checkbox input:checked ~ .helper::after,
         .checkbox input:checked ~ .helper::before {
@@ -880,7 +884,7 @@ const Demo = ({
           transform: translate(-50%, -50%) scale(0);
         }
         .button:hover {
-          color: #ef286b;
+          color: #28bdef;
           box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
             0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
         }
@@ -895,7 +899,8 @@ const Demo = ({
         }
 
         .box-container {
-          width: 100%;
+          // width: 100%;
+          width: 30rem;
           background-color: #fff;
           margin: auto;
           padding: 2rem;
