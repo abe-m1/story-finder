@@ -46,7 +46,7 @@ const Signup = () => {
       <div className="page">
         <div className="login">
           <p style={{ color: '#FF0000', fontSize: '11px' }}>
-            Test Username: tester1, Password: password
+            Test Username: test@test.com, Password: password
           </p>
           <h2>Signup</h2>
           <Form
