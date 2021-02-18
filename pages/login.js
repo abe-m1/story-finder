@@ -41,9 +41,7 @@ const Login = () => {
     <Layout>
       <div className="page">
         <div className="login">
-          <p style={{ color: '#FF0000', fontSize: '11px' }}>
-            Test Username: test@test.com, Password: password
-          </p>
+          <p style={{ color: '#FF0000', fontSize: '11px' }}></p>
           <h2>Sign in</h2>
           <Form isLogin errorMessage={errorMsg} onSubmit={handleSubmit} />
         </div>
